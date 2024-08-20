@@ -1,13 +1,14 @@
-setwd("C:/Users/user/Dropbox/WORK/Dengue Project 2022/11_DENData")
+setwd("C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/11_DENData")
 # setwd("/Users/eideobra/Dropbox/11_DENData")
 rm(list= ls())
 require(stringi)
+require(stringr)
 require(stringdist)
 require(sf)
 require(lubridate)
 require(rnaturalearth)
 require(dplyr)
-remotes::install_github("epicentre-msf/hmatch")
+# remotes::install_github("epicentre-msf/hmatch")
 require(hmatch)
 require(countrycode)
 require(mapview)
@@ -15,8 +16,8 @@ require(readxl)
 
 # load in master openDengue file
 # od <- read.csv("/Users/eideobra/Documents/GitHub/OpenDengue/master-repo/data/raw_data/masterDB_V1.1.csv")
-od <- read.csv("01_Dengue_data/OD_master/OD_V1.2/masterDB_V1.2.csv")
-
+# od <- read.csv("01_Dengue_data/OD_master/OD_V1.3/masterDB_V1.3.csv")
+od <- master2
 
 summary(is.na(od))
 ### Location information checking
@@ -159,8 +160,12 @@ od$T_res[od$T_res >= 300] = 3
 od$T_res = c("Week", "Month", "Year")[od$T_res]
 od$T_res = factor(od$T_res, levels = c("Week", "Month", "Year"))
 
+
+
+
 # add year column
 od$Year = year(as.Date(od$calendar_start_date))
+
 
 # add single location identifier
 od$full_name <- apply(od[, c("adm_0_name", "adm_1_name", "adm_2_name")],
@@ -197,7 +202,7 @@ error_countries <- GAUL_adm0 %>%
   arrange(COUNTRY_ID)%>%
   filter(n>1)
   
-
+unique(error_countries$COUNTRY_ID)
 
 # A) processing GAUL codes ===========================================================================
 GAUL_adm0$NAME_A0 = GAUL_adm0$COUNTRY_ID
@@ -1035,7 +1040,7 @@ od = od[, c("adm_0_name",
             "T_res", 
             "UUID")]
 
-summary(is.na(od)) #391429 obs
+summary(is.na(od)) #394458 obs
 
 # write.csv(od, "01_Dengue_data/OD_master/od.csv", row.names=F)
 rm(GAUL_match, RNE_match, od_match); gc()
@@ -1049,19 +1054,20 @@ od <- od %>%
   mutate(rowid = row_number())
 
 # leap year corrections
-od <- od %>%
-  mutate(calendar_end_date = ifelse(
+
+od <- od %>% 
+  mutate(calendar_end_date = ifelse(T_res == "Month" & 
     leap_year(calendar_end_date) & month(calendar_end_date) == 2 & day(calendar_end_date) == 28,
     paste0(Year, "-02-29"),
     as.character(calendar_end_date)
-  ),
-  calendar_start_date = ifelse(
-    leap_year(calendar_start_date) & month(calendar_start_date) == 2 & day(calendar_start_date) == 28,
-    paste0(Year, "-02-29"),
-    as.character(calendar_start_date)
-  ))
+  )
+  # calendar_start_date = ifelse(
+  #   leap_year(calendar_start_date) & month(calendar_start_date) == 2 & day(calendar_start_date) == 28,
+  #   paste0(Year, "-02-29"),
+  #   as.character(calendar_start_date)
+  # )
+  )
 
-od <- od %>% select(-leap, -leap_start)
 
 # For original data source names of TYCHO
 tycho <- read.csv("01_Dengue_data/source_files/original_name/tycho_dengue_allcountries.csv")
@@ -1077,6 +1083,8 @@ od <- od %>%
   rowwise()%>%
   mutate(source_cat = strsplit(UUID, "-")[[1]][1])
 
+write.csv(od, "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/OD_analysis/Imputation/od_before_doublecount.csv", row.names=F)
+od <- read.csv("C:/Users/user/Dropbox/WORK/OpenDengue/OD_analysis/Imputation/od_before_doublecount.csv")
 
 # 1) check double count cases 
 od <- od %>%
@@ -1122,12 +1130,12 @@ dup1 <- od %>%
   filter(dup1 == TRUE & rowid == max(rowid))%>%
   ungroup() # 0 obs to be removed
 
-# 3-2) if multiple data sources, remove the lower data hierarchy
+# 3-2) if multiple data sources, remove the data from lower hierarchy
 # Dengue cases are taken from the higher data hierarchy regardless of whether they are higher in the lower hierarchy
 dup2 <- od %>%
   group_by(full_name, calendar_start_date, calendar_end_date)%>%
   filter(double == TRUE & source_cat2 < max(source_cat2))%>%
-  ungroup() # 7425 obs to be removed
+  ungroup() # 7442 obs to be removed
 
 # remove duplicated rows
 od <- od %>%
@@ -1164,41 +1172,78 @@ x <- od %>%
 
 # write.csv(x, "01_Dengue_data/OD_master/error_inspection.csv", row.names=F)
 
+# different full_name but same FAO_GAUL_code and same dengue counts (e.g., adm2 for Thailand)
+dup4 <- od %>%
+  filter(!FAO_GAUL_code %in% c(176, 100)) %>%  # Exclude Caribbean countries (they share GAUL codes 176 and 100)
+  group_by(FAO_GAUL_code, calendar_start_date, calendar_end_date, dengue_total) %>%  
+  filter(n() > 1 & n_distinct(UUID) > 1) %>%  
+  filter(source_cat2 < max(source_cat2)) %>%  
+  ungroup()
+
+od <- od %>%
+  filter(!rowid %in% dup4$rowid)  
+
+
+# different full_name but same FAO_GAUL_code and same dengue counts (e.g., adm2 for India, Indonesia)
+# same source_cat 
+dup5 <- od %>%
+  filter(!FAO_GAUL_code %in% c(176, 100)) %>%  # Exclude Caribbean countries (GAUL codes 176 and 100)
+  group_by(FAO_GAUL_code, calendar_start_date, calendar_end_date, dengue_total) %>%  
+  filter(n() > 1 & n_distinct(UUID) > 1) %>%  
+  filter((source_cat2 == max(source_cat2) & rowid == max(rowid))) %>%  # same source_cat
+  ungroup()
+
+od <- od %>%
+  filter(!rowid %in% dup5$rowid)  
+
+dup6 <- od %>%
+  filter(!FAO_GAUL_code %in% c(176, 100)) %>%  # Exclude Caribbean countries (they share GAUL codes 176 and 100)
+  group_by(FAO_GAUL_code, calendar_start_date, calendar_end_date) %>%  
+  filter(n() > 1 & n_distinct(UUID) > 1)%>%  
+  filter(source_cat2 < max(source_cat2)) %>%  
+  ungroup()
+
+od <- od %>%
+  filter(!rowid %in% dup6$rowid) 
+
 # final check
 od[duplicated(od),]%>% arrange(full_name, calendar_start_date)
 
 
 # update filingDB and metadata ===============================================
-f <- read_excel("01_Dengue_data/OD_master/filingDB_allV.xlsx", sheet=1) 
+# f <- read_excel("01_Dengue_data/OD_master/filingDB_allV.xlsx", sheet=1) 
+# 
+# f <- f %>%
+#   mutate(released = ifelse(released == "Y" & !UUID %in% od$UUID, "N (dup)", released))
+# 
+# meta_public <- f %>%
+#   filter(released == "Y")%>%
+#   select("UUID", "source_cat","country","period", "case_definition_original","metadata_description", "metadata_url", "metadata_steps")%>%
+#  
+#   arrange(desc(source_cat), country, period)
 
-f <- f %>%
-  mutate(released = ifelse(released == "Y" & !UUID %in% od$UUID, "N (dup)", released))
-
-meta_public <- f %>%
-  filter(released == "Y")%>%
-  select("UUID", "source_cat","country","period", "case_definition_original","metadata_description", "metadata_url", "metadata_steps")%>%
- 
-  arrange(desc(source_cat), country, period)
-
-writexl::write_xlsx(f, "01_Dengue_data/OD_master/filingDB_allV_V1.2.2.xlsx")
-write.csv(meta_public, "01_Dengue_data/OD_master/OD_V1.2.2/sourcedata_V1.2.2.csv", row.names = F)
+# writexl::write_xlsx(f, "01_Dengue_data/OD_master/filingDB_allV_V1.2.2.xlsx")
+# write.csv(meta_public, "01_Dengue_data/OD_master/OD_V1.2.2/sourcedata_V1.2.2.csv", row.names = F)
 
 
 # 383548 obs
-# 2484414 obs (including brazil adm2)
+# 2487248 obs (including brazil adm2)
 od <- od %>% select(-(rowid:error))
 
 
-write.csv(od, "01_Dengue_data/OD_master/od.csv", row.names=F)
-# 
-# od <- read.csv("01_Dengue_data/OD_master/od2.csv")
+
+write.csv(od, "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/OD_analysis/Imputation/od.csv", row.names=F)
+# # 
+
 
 # EXTRACT builders ===========================================
 
+od <- read.csv("C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/OD_imputation/OD_revision/od.csv")
+
 adm0_codes <- od[od$S_res == "Admin0", c("adm_0_name", "FAO_GAUL_code", "RNE_iso_code")] %>% 
   distinct()
-adm0_codes <- rbind(adm0_codes, 
-                    data.frame = c("COLOMBIA", 54, "COL"))
+# adm0_codes <- rbind(adm0_codes, 
+#                     data.frame = c("COLOMBIA", 57, "COL"))
 
 ##### 01 national extract builder  ########
 
@@ -1207,150 +1252,153 @@ od_adm0 <- od[od$S_res == "Admin0", ]
 od_adm1 <- od[od$S_res == "Admin1", ]
 od_adm2 <- od[od$S_res == "Admin2", ]
 
+od_adm0$country_year = paste0(od_adm0$adm_0_name, "_", od_adm0$Year)
+od_adm1$country_year = paste0(od_adm1$adm_0_name, "_", od_adm1$Year)
+od_adm2$country_year = paste0(od_adm2$adm_0_name, "_", od_adm2$Year)
+
 # check if any countries have more dengue case counts in admin1 data for any given years
-a0_sum <- aggregate(dengue_total ~ adm_0_name + Year, data = od_adm0, FUN = sum)
-a1_sum <- aggregate(dengue_total ~ adm_0_name + Year, data = od_adm1, FUN = sum)
-a2_sum <- aggregate(dengue_total ~ adm_0_name + Year, data = od_adm2, FUN = sum)
+a0_sum <- od_adm0 %>%
+  group_by(adm_0_name, Year, T_res)%>%
+  mutate(dengue_total = sum(dengue_total))%>%
+  ungroup()%>%
+  select(adm_0_name, Year, T_res, dengue_total)%>%
+  distinct()
 
-# identify conflicts
-# conflicts = admin1 data higher counts than admin0
-# or admin1 data for years and countries not in admin 0
+a1_sum <- od_adm1 %>%
+  group_by(adm_0_name, Year, T_res)%>%
+  mutate(dengue_total = sum(dengue_total))%>%
+  ungroup()%>%
+  select(adm_0_name, Year, T_res, dengue_total)%>%
+  distinct()
 
-# loop through admin1 summaries to build conflicts list
-conflicts = data.frame(adm_0_name = NA,
-                       Year = NA,
-                       Type = "NA")
-conflicts = conflicts[-1, ]
+a2_sum <- od_adm2 %>%
+  group_by(adm_0_name, Year, T_res)%>%
+  mutate(dengue_total = sum(dengue_total))%>%
+  ungroup()%>%
+  select(adm_0_name, Year, T_res, dengue_total)%>%
+  distinct()
 
-for(i in 1:nrow(a1_sum)){
-  # find any matching records in a0
-  link = a0_sum[(a0_sum$adm_0_name == a1_sum$adm_0_name[i]) & 
-                  (a0_sum$Year == a1_sum$Year[i]), ]
-  if(nrow(link) == 0){
-    conflicts = rbind(conflicts,
-                      data.frame(adm_0_name = a1_sum$adm_0_name[i],
-                                 Year = a1_sum$Year[i],
-                                 Type = "Data_ad1_noData_ad0"))
-  }else{
-    if(a1_sum$dengue_total[i] > link$dengue_total){
-      conflicts = rbind(conflicts,
-                        data.frame(adm_0_name = link$adm_0_name,
-                                   Year = link$Year,
-                                   Type = "HigherData_ad1_than_ad0"))}
-  }
-  
-}
+a0_sum$country_year = paste0(a0_sum$adm_0_name, "_", a0_sum$Year)
+a1_sum$country_year = paste0(a1_sum$adm_0_name, "_", a1_sum$Year)
+a2_sum$country_year = paste0(a2_sum$adm_0_name, "_", a2_sum$Year)
 
+names(a0_sum)[4] <- "a0_sum"
+names(a1_sum)[4] <- "a1_sum"
+names(a2_sum)[4] <- "a2_sum"
 
+all_sum <- merge(a0_sum[, c("country_year", "T_res", "a0_sum")], 
+                 a1_sum[, c("country_year", "T_res", "a1_sum")], by=c("country_year", "T_res"), all = T)
 
-# now go through the conflicts one by one, aggregate up the ad1 data then replace or add to ad0 as necessary
-for(i in 1:nrow(conflicts)){
-  # if replacing the record, remove original record first
-  if(conflicts$Type[i] == "HigherData_ad1_than_ad0"){
-    od_adm0 = od_adm0[!((od_adm0$adm_0_name == conflicts$adm_0_name[i]) &
-                          (od_adm0$Year == conflicts$Year[i])), ]
-  }
-  
-  # find the admin1 records and spatially aggregate
-  ad1_recs = od_adm1[(od_adm1$adm_0_name == conflicts$adm_0_name[i]) &
-                       (od_adm1$Year == conflicts$Year[i]), ]
-  # identify unique start and end date combinations
-  u_dates = unique(ad1_recs[, c("calendar_start_date", "calendar_end_date")])
-  # now loop through dates aggregating records
-  for(k in 1:nrow(u_dates)){
-    ad1_recs_t <- ad1_recs[(ad1_recs$calendar_start_date %in% u_dates[k, 1]) &
-                             (ad1_recs$calendar_end_date %in% u_dates[k, 2]), ]
-    # compose the new record to be added
-    new_rec = ad1_recs_t[1, ]
-    new_rec$adm_1_name = NA
-    new_rec$FAO_GAUL_code = adm0_codes$FAO_GAUL_code[new_rec$adm_0_name == adm0_codes$adm_0_name]
-    new_rec$RNE_iso_code = adm0_codes$RNE_iso_code[new_rec$adm_0_name == adm0_codes$adm_0_name]
-    new_rec$IBGE_code = NA
-    
-    new_rec$S_res = "Admin0"
-    new_rec$full_name = new_rec$adm_0_name
-    new_rec$dengue_total = sum(ad1_recs_t$dengue_total)
-    
-    # now replace with new record
-    od_adm0 = rbind(od_adm0, new_rec)
-  }
-}
+all_sum <- merge(all_sum, 
+                 a2_sum[, c("country_year", "T_res", "a2_sum")], by=c("country_year", "T_res"), all = T)
 
-# now just re-sort by country name and date
-od_adm0 = od_adm0[order(od_adm0$adm_0_name, od_adm0$calendar_start_date), ]
+all_sum <- all_sum %>%
+  # pivot_wider(names_from = "T_res", values_from = c(a0_sum:a2_sum) )
+  pivot_longer(a0_sum:a2_sum, names_to = "S_res", values_to = "sum")%>%
+  filter(!is.na(sum))
 
+all_sum <- all_sum %>% 
+  group_by(country_year)%>%
+  mutate(max_value = max(sum, na.rm=T))%>%
+  filter(max_value == sum)%>%
+  mutate(T_res_n = ifelse(T_res == "Week", 2, ifelse(T_res == "Month", 1, 0)))%>%
+  mutate(S_res_n = ifelse(S_res == "a0_sum", 2, ifelse(S_res == "a1_sum", 1, 0)))%>%
 
+  slice_max(order_by = T_res_n)%>%
+  slice_max(order_by = S_res_n)
 
-#### same again but for admin 2 data
-# identify conflicts
-# conflicts = admin2 data higher counts than admin0
-# or admin2 data for years and countries not in admin 0
+# records to keep
+od_adm0_new <- subset(od_adm0, (with(od_adm0, paste0(country_year, T_res)) %in% with(all_sum[all_sum$S_res == "a0_sum",], paste0(country_year, T_res))))
+od_adm1_new <- subset(od_adm1, (with(od_adm1, paste0(country_year, T_res)) %in% with(all_sum[all_sum$S_res == "a1_sum",], paste0(country_year, T_res))))
+od_adm2_new <- subset(od_adm2, (with(od_adm2, paste0(country_year, T_res)) %in% with(all_sum[all_sum$S_res == "a2_sum",], paste0(country_year, T_res))))
 
-# loop through admin1 summaries to build conflicts list
-conflicts = data.frame(adm_0_name = NA,
-                       Year = NA,
-                       Type = "NA")
-conflicts = conflicts[-1, ]
+# check any duplicates 
+od_adm0_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  filter(n()>1)
 
-for(i in 1:nrow(a2_sum)){
-  # find any matching records in a0
-  link = a0_sum[(a0_sum$adm_0_name == a2_sum$adm_0_name[i]) & 
-                  (a0_sum$Year == a2_sum$Year[i]), ]
-  if(nrow(link) == 0){
-    conflicts = rbind(conflicts,
-                      data.frame(adm_0_name = a2_sum$adm_0_name[i],
-                                 Year = a2_sum$Year[i],
-                                 Type = "Data_ad2_noData_ad0"))
-  }else{
-    if(a2_sum$dengue_total[i] > link$dengue_total){
-      conflicts = rbind(conflicts,
-                        data.frame(adm_0_name = link$adm_0_name,
-                                   Year = link$Year,
-                                   Type = "HigherData_ad2_than_ad0"))}
-  }
-}
+# spatially aggregate adm1 and compose the new record to be added
+od_adm1_new <- od_adm1_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  mutate(dengue_total = sum(dengue_total, na.rm=T), 
+         adm_1_name = NA, 
+         adm_2_name = NA, 
+         S_res = "Admin0",
+         full_name = adm_0_name
+         
+         )%>%
+  select(-FAO_GAUL_code, -RNE_iso_code)
 
-# now go through the conflicts one by one, aggregate up the ad2 data then replace or add to ad0 as necessary
-for(i in 1:nrow(conflicts)){
-  # if replacing the record, remove original record first
-  if(conflicts$Type[i] == "HigherData_ad2_than_ad0"){
-    od_adm0 = od_adm0[!((od_adm0$adm_0_name == conflicts$adm_0_name[i]) &
-                          (od_adm0$Year == conflicts$Year[i])), ]
-  }
-  
-  # find the admin2 records and spatially aggregate
-  ad2_recs = od_adm2[(od_adm2$adm_0_name == conflicts$adm_0_name[i]) &
-                       (od_adm2$Year == conflicts$Year[i]), ]
-  # identify unique start and end date combinations
-  u_dates = unique(ad2_recs[, c("calendar_start_date", "calendar_end_date")])
-  # now loop through dates aggregating records
-  for(k in 1:nrow(u_dates)){
-    ad2_recs_t <- ad2_recs[(ad2_recs$calendar_start_date %in% u_dates[k, 1]) &
-                             (ad2_recs$calendar_end_date %in% u_dates[k, 2]), ]
-    # compose the new record to be added
-    new_rec = ad2_recs_t[1, ]
-    new_rec$adm_1_name = NA
-    new_rec$adm_2_name = NA
-    new_rec$FAO_GAUL_code = adm0_codes$FAO_GAUL_code[new_rec$adm_0_name == adm0_codes$adm_0_name]
-    new_rec$RNE_iso_code = adm0_codes$RNE_iso_code[new_rec$adm_0_name == adm0_codes$adm_0_name]
-    new_rec$IBGE_code = NA
-    new_rec$S_res = "Admin0"
-    new_rec$full_name = new_rec$adm_0_name
-    new_rec$dengue_total = sum(ad2_recs_t$dengue_total)
+# check UUIDs are different for the same dates 
+check <- merge(od_adm1_new, adm0_codes, by=c("adm_0_name"), all.x=T)%>%
+  select(names(od_adm0))%>%
+  # distinct()
+  group_by(adm_0_name, calendar_start_date, calendar_end_date, dengue_total)%>%
+  filter(n_distinct(UUID)>1)%>%
+  group_by(calendar_start_date, UUID, dengue_total)%>% tally()
 
-   
-    # now replace with new record
-    od_adm0 = rbind(od_adm0, new_rec)
-  }
-}
+od_adm1_new <- od_adm1_new[!((od_adm1_new$UUID == check$UUID[check$n ==1]) & 
+                         (od_adm1_new$calendar_start_date == check$calendar_start_date[check$n ==1])), ]
 
-# now just re-sort by country name and date againa nd rename
-od_adm0 = od_adm0[order(od_adm0$adm_0_name, od_adm0$calendar_start_date), ]
-national_extract <- od_adm0
+# standardise the adm0 codes
+od_adm1_new <- merge(od_adm1_new, adm0_codes, by=c("adm_0_name"), all.x=T)%>%
+  select(names(od_adm0))%>%
+  distinct()
+
+# check any duplicates 
+od_adm1_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  filter(n()>1)
+
+# same again but for adm2 data
+od_adm2_new <- od_adm2_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  mutate(dengue_total = sum(dengue_total, na.rm=T), 
+         adm_1_name = NA, 
+         adm_2_name = NA, 
+         S_res = "Admin0",
+         full_name = adm_0_name,
+         IBGE_code = NA
+         )%>%
+  select(-FAO_GAUL_code, -RNE_iso_code)
+
+# check UUIDs are different
+check2 <- merge(od_adm2_new, adm0_codes, by=c("adm_0_name"), all.x=T)%>%
+  select(names(od_adm0))%>%
+  # distinct()
+  group_by(adm_0_name, calendar_start_date, calendar_end_date, dengue_total)%>%
+  filter(n_distinct(UUID)>1)%>%
+  group_by(calendar_start_date, UUID, dengue_total)%>% tally()
+
+nrow(check2)
+
+od_adm2_new <- merge(od_adm2_new, adm0_codes, by=c("adm_0_name"), all.x=T)%>%
+  select(names(od_adm0))%>%
+  distinct()
+
+# check any duplicates 
+od_adm2_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  filter(n()>1)
+
+# merge everything
+od_adm0_new <- rbind(od_adm0_new, od_adm1_new)
+od_adm0_new <- rbind(od_adm0_new, od_adm2_new)
+od_adm0_new <- od_adm0_new %>% select(-country_year)
+
+# now just re-sort by country name and date again and rename
+od_adm0_new = od_adm0_new[order(od_adm0_new$adm_0_name, od_adm0_new$calendar_start_date), ]
+
+# final check
+od_adm0_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>% 
+  filter(n() > 1)
+
 
 # save national extract
 # write.csv(national_extract, file = "/Users/eideobra/Documents/GitHub/OpenDengue/master-repo/data/releases/V1.1/National_extract_V1_1.csv", row.names=F)
 write.csv(national_extract, file = "01_Dengue_data/OD_master/OD_V1.2.2/releases/National_extract_V1_2_2.csv", row.names=F)
+
 
 
 
@@ -1470,10 +1518,6 @@ write.csv(spatial_extract, file = "01_Dengue_data/OD_master/OD_V1.2.2/releases/S
 
 
 
-
-
-
-
 ###############################################
 ##### 03 temporally preserved extract  ########
 ###############################################
@@ -1498,79 +1542,31 @@ od_Month = od_Month[!ind_Month, ]
 toadd2 <- od_Year[ind_Year, ]
 od_Year = od_Year[!ind_Year, ]
 
-# template for collection
-toadd_mix1 = od_Month[1, ]
-toadd_mix1 = toadd_mix1[-1, ]
-
-# loop through Monthly records and see which ones need to be added
-# for(i in 1:nrow(od_Month)){
-#   # assemble records from the corresponding area in Weekly data
-#   f_od_Week = od_Week[od_Week$full_name == od_Month$full_name[i], ]
-#   
-#   # if this record is from a time when we don't have data then add it to the list
-#   if(!(od_Month$calendar_start_date[i] %in% f_od_Week$calendar_start_date)){
-#     toadd_mix1 = rbind(toadd_mix1, od_Month[i, ])
-#   }
-# }
-
+# now compare spatially overlapping records 
 f_name = unique(od_Week$full_name[od_Week$full_name %in% od_Month$full_name])
 
-c_progress = 0
- 
-for(c in 1:length(f_name)){ 
-  s_od_Month = od_Month[od_Month$full_name %in% f_name[c], ]
-  f_od_Week = od_Week[od_Week$full_name %in% f_name[c], ]
+# filter od_Week and od_Month data frames based on common full_name values
+f_Week <- od_Week %>% filter(full_name %in% f_name)
+f_Month <- od_Month %>% filter(full_name %in% f_name)
 
-  for(i in 1:nrow(s_od_Month)){
-
-    # if this record is from a time when we don't have data then add it to the list
-    if(!(s_od_Month$calendar_start_date[i] %in% unique(f_od_Week$calendar_start_date))){
-      toadd_mix1 = rbind(toadd_mix1, s_od_Month[i, ])
-    }
-
-  }
-  c_progress <- c_progress + 1
-  cat("Outer Loop Progress: ", c_progress, "/", length(f_name), "\r")
-
-}
+# find records in f_Month that do not have a corresponding calendar_start_date and full_name in f_Week
+toadd_mix1_new <- f_Month %>%
+  anti_join(f_Week, by = c("full_name", "calendar_start_date"))
 
 # add monthly datasets to weekly records then repeat with annual data
 od_Week = rbind(od_Week, toadd_mix1)
 
-# template for collection
-toadd_mix2 = od_Year[1, ]
-toadd_mix2 = toadd_mix2[-1, ]
+f_name2 = unique(od_Week$full_name[od_Week$full_name %in% od_Year$full_name])
 
-# loop through Yearly records and see which ones need to be added
-# for(i in 1:nrow(od_Year)){
-#   # assemble records from the corresponding area in Weekly data
-#   f_od_Week = od_Week[od_Week$full_name == od_Year$full_name[i], ]
-#   
-#   # if this record is from a time when we don't have data then add it to the list
-#   if(!(od_Year$calendar_start_date[i] %in% f_od_Week$calendar_start_date)){
-#     toadd_mix2 = rbind(toadd_mix2, od_Year[i, ])
-#   }
-# }
+# filter od_Week and od_Year data frames based on common full_name 
+f_Week <- od_Week %>% filter(full_name %in% f_name2)
+f_Year <- od_Year %>% filter(full_name %in% f_name2)
 
-f_name = unique(od_Week$full_name[od_Week$full_name %in% od_Year$full_name])
+# find records in f_Year that don't have matching calendar_start_date in f_Week
+toadd_mix2_new <- f_Year %>%
+  anti_join(f_Week, by = c("full_name", "calendar_start_date"))
 
-c_progress = 0
- 
-for(c in 1:length(f_name)){ 
-  s_od_Year = od_Year[od_Year$full_name %in% f_name[c], ]
-  f_od_Week = od_Week[od_Week$full_name %in% f_name[c], ]
-
-  for(i in 1:nrow(s_od_Year)){
-
-    # if this record is from a time when we don't have data then add it to the list
-    if(!(s_od_Year$calendar_start_date[i] %in% unique(f_od_Week$calendar_start_date))){
-      toadd_mix2 = rbind(toadd_mix2, s_od_Year[i, ])
-  }
-  }
-  c_progress <- c_progress + 1
-  cat("Outer Loop Progress: ", c_progress, "/", length(f_name), "\r")
-}
-
+# merge everything
 temporal_extract <- rbind(od_Week, toadd1, toadd2, toadd_mix2)
 
 
@@ -1596,20 +1592,22 @@ btoadd2 <- bra_Year[ind_Year, ]
 bra_Year = bra_Year[!ind_Year, ]
 
 # find records that both spatially and temporally overlap
+f_name = unique(bra_Week$full_name[bra_Week$full_name %in% bra_Month$full_name])
+
 num_w <- bra_Week %>%
-  filter(full_name %in% bra_Month$full_name)%>%
+  filter(full_name %in% f_name)%>%
   group_by(full_name, Year)%>%
   tally() %>% rename(week_n = n)
 
 num_m <- bra_Month %>%
- filter(full_name %in% num_w$full_name)%>%
+ filter(full_name %in% f_name)%>%
  group_by(full_name, Year)%>%
  tally() %>% rename(month_n = n)
 
 num <- merge(num_w, num_m, by=c("full_name", "Year"), all = T) %>%
   filter(!is.na(week_n) & !is.na(month_n))
 
-# no overlaps found for now !!!!!
+# no overlaps found for now !!!!! (monthly data available only when weekly is not available)
 
 # #subset records to loop through (only the records for 2013 overlap in Week and Month)
 # btoadd3 = bra_Month[bra_Month$full_name %in% num$full_name & !bra_Month$Year == 2013 , ]
@@ -1640,13 +1638,16 @@ bra_Week = rbind(bra_Week, bra_Month)
 
 # repeat with annual data
 # find records that both spatially and temporally overlap
+
+f_name2 = unique(bra_Week$full_name[bra_Week$full_name %in% bra_Year$full_name])
+
 num_w <- bra_Week %>%
-  filter(full_name %in% bra_Year$full_name)%>%
+  filter(full_name %in% f_name2)%>%
   group_by(full_name, Year)%>%
   tally() %>% rename(week_n = n)
 
 num_y <- bra_Year %>%
- filter(full_name %in% num_w$full_name)%>%
+ filter(full_name %in% f_name2)%>%
  group_by(full_name, Year)%>%
   tally() %>% rename(year_n = n)
 
