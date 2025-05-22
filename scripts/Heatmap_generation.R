@@ -1,4 +1,3 @@
-# styler: on
 rm(list = ls())
 pacman::p_load("dplyr", "lubridate", "tidyr", "tidyverse", "knitr", "stringi", "zoo", "data.table", "ggplot2", "sf", "rnaturalearth", "sf", "rnaturalearthdata", "distill", "downloadthis", "patchwork", "plotly", "showtext", "here", "htmlwidgets", "crosstalk")
 showtext_auto()
@@ -326,7 +325,7 @@ saveWidget(p, paste0(git_path, "docs/figure/heatmap_temporal_", today, ".html"),
 plyr::count(dt_heatmap$T_res_nm)
 
 # static image
-PAHO_temp <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2023, ], "Americas", "temporal", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
+PAHO_temp <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Americas", "temporal", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
   theme(
     plot.title = element_text(size = 28),
     axis.text = element_text(size = 20),
@@ -335,7 +334,7 @@ PAHO_temp <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2023, ], "Americas", "t
     legend.text = element_text(size = 20)
   )
 
-ASIA_temp <- heatmap_base(dt_heatmap, "Asia", "temporal", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
+ASIA_temp <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Asia", "temporal", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
   theme(
     plot.title = element_text(size = 28),
     axis.text = element_text(size = 20),
@@ -363,8 +362,8 @@ ggsave(paste0(git_path, "docs/figure/heatmap_temporal_", today, ".png"), combine
 
 # interactive
 
-PAHO_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2023, ], "Americas", "spatial", subregion = FALSE) + xlab(NULL) + ylab(NULL)
-ASIA_spat <- heatmap_base(dt_heatmap, "Asia", "spatial", subregion = FALSE) + xlab(NULL) + ylab(NULL)
+PAHO_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Americas", "spatial", subregion = FALSE) + xlab(NULL) + ylab(NULL)
+ASIA_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Asia", "spatial", subregion = FALSE) + xlab(NULL) + ylab(NULL)
 
 p1 <- ggplotly(PAHO_spat + ggtitle(NULL), tooltip = c("text")) %>% layout(annotations = a)
 p2 <- ggplotly(ASIA_spat + ggtitle(NULL), tooltip = c("text")) %>% layout(annotations = b)
@@ -382,7 +381,7 @@ p <- subplot(style(p1, showlegend = F), p2, nrows = 1, margin = 0.08) %>%
 saveWidget(p, paste0(git_path, "docs/figure/heatmap_spatial_", today, ".html"), selfcontained = T, libdir = "lib")
 
 # image
-PAHO_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2023, ], "Americas", "spatial", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
+PAHO_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Americas", "spatial", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
   theme(
     plot.title = element_text(size = 28),
     axis.text = element_text(size = 20),
@@ -391,7 +390,7 @@ PAHO_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2023, ], "Americas", "s
     legend.text = element_text(size = 20)
   )
 
-ASIA_spat <- heatmap_base(dt_heatmap, "Asia", "spatial", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
+ASIA_spat <- heatmap_base(dt_heatmap[!dt_heatmap$Year == 2025, ], "Asia", "spatial", subregion = TRUE) + xlab(NULL) + ylab(NULL) +
   theme(
     plot.title = element_text(size = 28),
     axis.text = element_text(size = 20),

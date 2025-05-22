@@ -1,16 +1,18 @@
 # styler: off
 rm(list = ls())
 
-dropbox_path = "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/11_DENData"
+dropbox_path = "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/11_DENData/"
 git_path = "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/master-repo-alim/master-repo/"
+dev_path = "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/OpenDengue-Dev/"
+
 today = gsub("-", "_", Sys.Date())
 version = "V1.3"
 release = TRUE
 
 if (release) {
   filename_fd = paste0(
-    git_path,
-    "data/archive/filingDB_allV_",
+    dev_path,
+    "archive/filingDB_allV_",
     version,
     ".xlsx"
   )
@@ -28,8 +30,8 @@ if (release) {
     cat("directory already exists at:", dir, "\n")
   }
 } else {
-  filename_fd = paste0(git_path, "/data/archive/filingDB_allV_", today, ".xlsx")
-  filename_sd = paste0(git_path, "/data/raw_data/sourcedata_", today, ".csv")
+  filename_fd = paste0(git_path, "data/archive/filingDB_allV_", today, ".xlsx")
+  filename_sd = paste0(git_path, "data/raw_data/sourcedata_", today, ".csv")
   filename_md = paste0(git_path, "data/raw_data/masterDB_", today, ".csv")
 }
 
@@ -48,6 +50,7 @@ require(countrycode)
 require(mapview)
 require(readxl)
 library(tidyr)
+library(ggplot2)
 
 # load in master openDengue file
 message("Loading in master opendengue file: ", filename_md)
@@ -183,19 +186,20 @@ ucn <- sort(unique(od$adm_0_name))
 c_match <- find_similar(ucn)
 # manually inspect for duplication
 head(c_match, n = 20)
-od$adm_0_name[od$adm_0_name == "VIETNAM"] = "VIET NAM"
-od$adm_0_name[od$adm_0_name == "WALLIS & FUTUNA"] = "WALLIS AND FUTUNA"
-od$adm_0_name[od$adm_0_name == "PITCAIRN ISLANDS"] = "PITCAIRN"
-od$adm_0_name[od$adm_0_name == "PNG"] = "PAPUA NEW GUINEA"
-od$adm_0_name[od$adm_0_name == "ST. LUCIA"] = "SAINT LUCIA"
-od$adm_0_name[od$adm_0_name == "ST. MARTIN"] = "SAINT MARTIN"
-od$adm_0_name[od$adm_0_name == "BONAIRE"] = "BONAIRE, SAINT EUSTATIUS AND SABA"
-
-od$adm_0_name[od$adm_0_name %in% c("FSM", "MICRONESIA (FED. STATES OF)")] = "MICRONESIA (FEDERATED STATES OF)"
-od$adm_0_name[od$adm_0_name %in% c("N MARIANA IS", "NORTHERN MARIANA ISLANDS (COMMONWEALTH OF THE)")] = "NORTHERN MARIANA ISLANDS"
-od$adm_0_name[od$adm_0_name == "ECUARDOR"] = "ECUADOR"
-od$adm_0_name[od$adm_0_name == "VIRGIN ISLANDS (USA)"] = "VIRGIN ISLANDS (US)"
-od$adm_0_name[od$adm_0_name == "LAO PEOPLE'S DEM. REP."] = "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
+# od$adm_0_name[od$adm_0_name == "VIETNAM"] = "VIET NAM"
+# od$adm_0_name[od$adm_0_name == "WALLIS & FUTUNA"] = "WALLIS AND FUTUNA"
+# od$adm_0_name[od$adm_0_name == "PITCAIRN ISLANDS"] = "PITCAIRN"
+# od$adm_0_name[od$adm_0_name == "PNG"] = "PAPUA NEW GUINEA"
+# od$adm_0_name[od$adm_0_name == "ST. LUCIA"] = "SAINT LUCIA"
+# od$adm_0_name[od$adm_0_name == "ST. MARTIN"] = "SAINT MARTIN"
+# od$adm_0_name[od$adm_0_name == "BONAIRE"] = "BONAIRE, SAINT EUSTATIUS AND SABA"
+# od$adm_0_name[od$adm_0_name == "LAO PEOPLE'S DEM. REP."] = "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
+# od$adm_0_name[od$adm_0_name == "LAOS"] = "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
+#
+# od$adm_0_name[od$adm_0_name %in% c("FSM", "MICRONESIA (FED. STATES OF)")] = "MICRONESIA (FEDERATED STATES OF)"
+# od$adm_0_name[od$adm_0_name %in% c("N MARIANA IS", "NORTHERN MARIANA ISLANDS (COMMONWEALTH OF THE)")] = "NORTHERN MARIANA ISLANDS"
+# od$adm_0_name[od$adm_0_name == "ECUARDOR"] = "ECUADOR"
+# od$adm_0_name[od$adm_0_name == "VIRGIN ISLANDS (USA)"] = "VIRGIN ISLANDS (US)"
 
 
 # B) admin 1 level
@@ -267,16 +271,6 @@ od_dates <- merge(
 # check any errors in dates
 od_dates <- od_dates[(od_dates$date != od_dates$std_date), ]
 
-# fix errors here for now
-od$calendar_end_date[
-  (od$UUID == "MOH-DOM-20072013-Y01-51" &
-    od$calendar_start_date == "2012-12-23") ] <- "2012-12-29"
-
-od$calendar_end_date[
-  (od$UUID == "MOH-DOM-20072013-Y01-51" &
-    od$calendar_start_date == "2013-12-22")] <-  "2013-12-28"
-
-
 # add year column
 od$Year = year(as.Date(od$calendar_start_date))
 
@@ -295,29 +289,20 @@ od$full_name <- apply(
 od$ISO_A0 = countrycode::countrycode(od$adm_0_name, "country.name", "iso3c")
 od$ISO_A0[od$adm_0_name == "SAINT MARTIN"] = "MAF"
 
-# remove "Other caribbean Islands"
-od <- od[!od$adm_0_name == "OTHER CARIBBEAN ISLANDS", ]
 
 # load in FAO GAUL shapefiles
-# GAUL_adm0 <- as.data.frame(read_sf("/Users/eideobra/Dropbox/C1_Reference/Country_shapefiles/Admin0(2011)/admin0.shp"))
-# GAUL_adm1 <- as.data.frame(read_sf("/Users/eideobra/Dropbox/C1_Reference/Country_shapefiles/Admin1(2011)/admin1.shp"))
-# GAUL_adm2 <- as.data.frame(read_sf("/Users/eideobra/Dropbox/C1_Reference/Country_shapefiles/Admin2(2011)/admin2.shp"))
-
 GAUL_adm0 <- as.data.frame(read_sf(paste0(
   dropbox_path,
-  "/04_Reference_data/Country_shapefiles/Admin0(2011)/admin0.shp"
+  "04_Reference_data/Country_shapefiles/Admin0(2011)/admin0.shp"
 )))
 GAUL_adm1 <- as.data.frame(read_sf(paste0(
   dropbox_path,
-  "/04_Reference_data/Country_shapefiles/Admin1(2011)/admin1.shp"
+  "04_Reference_data/Country_shapefiles/Admin1(2011)/admin1.shp"
 )))
 GAUL_adm2 <- as.data.frame(read_sf(paste0(
   dropbox_path,
-  "/04_Reference_data/Country_shapefiles/Admin2(2011)/admin2.shp"
+  "04_Reference_data/Country_shapefiles/Admin2(2011)/admin2.shp"
 )))
-#
-# gaul_adm1 <- read_sf("./04_Reference_data/Country_shapefiles/Admin1(2011)/admin1.shp")
-# gaul_adm2 <- read_sf("./04_Reference_data/Country_shapefiles/Admin2(2011)/admin2.shp")
 
 # check if multiple adm 0 gaul codes assigned to a country
 error_countries <- GAUL_adm0 %>%
@@ -494,10 +479,10 @@ od_match$NAME_A2[
 ] = "SANTA MARTA (DIST. ESP.)" # !!!!!!!
 
 
-# colombia_admin <- read.csv("/Users/eideobra/Dropbox/11_DENData/04_Reference_data/Colombia_adm2_GAUL_lookup.csv")%>% filter(!GAUL_admin2 == "")
-colombia_admin <- read.csv(
-  "./04_Reference_data/Colombia_adm2_GAUL_lookup.csv"
-) %>%
+
+colombia_admin <- read.csv(paste0(dropbox_path,
+  "/04_Reference_data/Colombia_adm2_GAUL_lookup.csv"
+)) %>%
   filter(!GAUL_admin2 == "")
 
 
@@ -662,7 +647,7 @@ od_match$NAME_A1[od_match$description %in% c("MYANMAR, NAYPYITAW", "MYANMAR, NAY
 # Nepal
 # load in lookup table
 # nepal_admin <- read.csv("/Users/eideobra/Dropbox/11_DENData/04_Reference_data/Nepal_district_GAUL_lookup.csv")
-nepal_admin <- read.csv("./04_Reference_data/Nepal_district_GAUL_lookup.csv")
+nepal_admin <- read.csv(paste0(dropbox_path, "04_Reference_data/Nepal_district_GAUL_lookup.csv"))
 nepal_admin$OD_admin2 = toupper(nepal_admin$OD_admin2)
 nepal_admin$GAUL_admin2 = toupper(nepal_admin$GAUL_admin2)
 
@@ -879,7 +864,7 @@ od_match$NAME_A1[
 
 # Saudi Arabia
 # SAU_admin <- read.csv("/Users/eideobra/Dropbox/11_DENData/04_Reference_data/SAU_adm1_RNE_lookup.csv")
-SAU_admin <- read.csv("./04_Reference_data/SAU_adm1_RNE_lookup.csv")
+SAU_admin <- read.csv(paste0(dropbox_path, "04_Reference_data/SAU_adm1_RNE_lookup.csv"))
 
 for (i in 1:nrow(SAU_admin)) {
   ind = (od_match$NAME_A0 == "SAU") & (od_match$NAME_A1 == SAU_admin$OD_adm2[i])
@@ -888,6 +873,7 @@ for (i in 1:nrow(SAU_admin)) {
   }
 }
 od_match$NAME_A1[od_match$description == "SAUDI ARABIA, AL-BAHAH"] = "BAHA"
+od_match$NAME_A1[od_match$description == "SAUDI ARABIA, AL-BAHAH"] = "NORTHERN FRONTIER"
 
 od_match$NAME_A2[
   od_match$NAME_A0 == "SAU" & !is.na(od_match$NAME_A1)
@@ -992,7 +978,7 @@ GAUL_match$GAUL_CODE[grepl(
 )] = 13277
 
 # China adm2
-china_admin_ext <- read.csv("./04_Reference_data/China_adm2_GAUL_extract.csv")
+china_admin_ext <- read.csv(paste0(dropbox_path, "04_Reference_data/China_adm2_GAUL_extract.csv"))
 
 china_admin_ext$ADM2_EN = toupper(china_admin_ext$ADM2_EN)
 china_admin_ext$ADM2_EN[
@@ -1009,11 +995,9 @@ GAUL_match$GAUL_CODE[
 )]
 
 # Colombia adm2
-# col_admin_ext <- read.csv("/Users/eideobra/Dropbox/11_DENData/04_Reference_data/Colombia_adm2_GAUL_extract.csv")%>% rename(NAME_A1 = ADM1_EN, NAME_A2 = ADM2_EN) %>% mutate(NAME_A0 = "COL") %>% dplyr::select(NAME_A0, NAME_A1, NAME_A2, GAUL_CODE)
-
-col_admin_ext <- read.csv(
-  "./04_Reference_data/Colombia_adm2_GAUL_extract.csv"
-) %>%
+col_admin_ext <- read.csv(paste0(dropbox_path,
+  "04_Reference_data/Colombia_adm2_GAUL_extract.csv"
+)) %>%
   rename(NAME_A1 = ADM1_EN, NAME_A2 = ADM2_EN) %>%
   mutate(NAME_A0 = "COL") %>%
   dplyr::select(NAME_A0, NAME_A1, NAME_A2, GAUL_CODE)
@@ -1433,8 +1417,8 @@ od_match$NAME_A1[od_match$description == "PHILIPPINES, CARAGA"] = "DINAGAT ISLAN
 
 # Saudi Arabia
 
-# SAU_admin <- read.csv("/Users/eideobra/Dropbox/11_DENData/04_Reference_data/SAU_adm1_RNE_lookup.csv")%>% filter(!RNE_adm1 == "")
-SAU_admin <- read.csv("./04_Reference_data/SAU_adm1_RNE_lookup.csv") %>%
+
+SAU_admin <- read.csv(paste0(dropbox_path, "04_Reference_data/SAU_adm1_RNE_lookup.csv")) %>%
   filter(!RNE_adm1 == "")
 
 
@@ -1446,17 +1430,17 @@ for (i in 1:nrow(SAU_admin)) {
 }
 
 od_match$NAME_A1[od_match$description == "SAUDI ARABIA, BAHA"] = "AL BAHAH"
+od_match$NAME_A1[od_match$description == "SAUDI ARABIA, NORTHERN BORDERS"] = "AL HUDUD ASH SHAMALIYAH"
+
 od_match$NAME_A1[
-  od_match$description == "SAUDI ARABIA, AL-SHAMAL"
-] = "AL HUDUD ASH SHAMALIYAH"
+  od_match$description == "SAUDI ARABIA, AL-SHAMAL"] = "AL HUDUD ASH SHAMALIYAH"
+
 
 # Solomon islands
 od_match$NAME_A1[
-  od_match$description == "SOLOMON ISLANDS, CENTRAL ISLANDS"
-] = "CENTRAL"
+  od_match$description == "SOLOMON ISLANDS, CENTRAL ISLANDS"] = "CENTRAL"
 od_match$NAME_A1[
-  od_match$description == "SOLOMON ISLANDS, HONIARA"
-] = "CAPITAL TERRITORY (HONIARA)"
+  od_match$description == "SOLOMON ISLANDS, HONIARA"] = "CAPITAL TERRITORY (HONIARA)"
 
 
 # Sri Lanka
@@ -1568,8 +1552,7 @@ unique(RNE_match$description[is.na(RNE_match$match_type)])
 
 # No RNE CODE available
 RNE_match$RNE_CODE[
-  RNE_match$description == "TAIWAN, LIENCHIANG COUNTY, NANGAN TOWNSHIP"
-] = "TWN"
+  RNE_match$description == "TAIWAN, LIENCHIANG COUNTY, NANGAN TOWNSHIP"] = "TWN"
 unique(RNE_match$description[is.na(RNE_match$RNE_CODE)])
 
 # check before assign if any NAs in RNE_CODE
@@ -1604,7 +1587,7 @@ od = od[, c(
   "UUID"
 )]
 
-summary(is.na(od)) #453649 obs
+summary(is.na(od)) #457403 obs
 
 rm(
   list = setdiff(
@@ -1612,6 +1595,8 @@ rm(
     c(
       "od",
       "git_path",
+      "dev_path",
+      "dropbox_path",
       "today",
       "version",
       "release",
@@ -1622,17 +1607,17 @@ rm(
   )
 )
 
-write.csv(od, paste0(git_path, "/open_dengue_1.3/od_geomatched.csv"), row.names=F)
+write.csv(od, paste0(dev_path, "open_dengue_1.3/output/od_geomatched.csv"), row.names=F)
+gc()
 
 # DOUBLE COUNT PROTOCOL  =============================================================
-od <- read.csv(paste0(git_path, "/open_dengue_1.3/od_geomatched.csv"))
+od <- read.csv(paste0(dev_path, "open_dengue_1.3/output/od_geomatched.csv"))
 
 bra <- read.csv(
-  paste0(git_path, "/open_dengue_1.3/Brazil_adm2_2001_2024.csv")
+  paste0(dev_path, "open_dengue_1.3/output/Brazil_adm2_2001_2024.csv")
 )
 
 od <- od %>%
-  # read.csv("01_Dengue_data/OD_master/od.csv") %>%
   rbind(., bra) %>%
   mutate(rowid = row_number())
 
@@ -1651,9 +1636,9 @@ od <- od %>%
   )
 
 # For original data source names of TYCHO
-tycho <- read.csv(
+tycho <- read.csv(paste0(dropbox_path,
   "01_Dengue_data/source_files/original_name/tycho_dengue_allcountries.csv"
-)
+))
 
 tycho$PeriodStartDate <- dmy(tycho$PeriodStartDate)
 tycho$Year <- year(tycho$PeriodStartDate)
@@ -1668,9 +1653,6 @@ od <- od %>%
   rowwise() %>%
   mutate(source_cat = strsplit(UUID, "-")[[1]][1])
 
-# write.csv(od, paste0(git_path, "data/od_before_doublecount.csv"), row.names = F)
-# od <- read.csv("C:/Users/user/Dropbox/WORK/OpenDengue/OD_Imputation/OD_revision/od_before_doublecount.csv")
-
 # 1) check double count cases
 od <- od %>%
   group_by(full_name, calendar_start_date, calendar_end_date) %>%
@@ -1682,7 +1664,7 @@ dup_tycho <- od %>%
   filter(any(source_cat %in% c("TYCHO")) & !any(source_cat %in% c("MOH"))) %>%
   mutate(dup_tycho = ifelse(n() > 1, TRUE, FALSE))
 
-dup_tycho %>% group_by(dup_tycho) %>% tally() # 385 records to be inspected
+dup_tycho %>% group_by(dup_tycho) %>% tally() # 3875 records to be inspected
 
 ### get list of countries where tycho source names need to be checked
 tycho_check <- dup_tycho %>%
@@ -1701,14 +1683,22 @@ tycho_check <- dup_tycho %>%
     all.x = T
   )
 
+# Check all distinct source names in TYCHO
 unique(tycho_check$SourceName)
+
+# Identify TYCHO records where the source is not WHO or PAHO (i.e. likely MOH)
 unique(tycho_check$SourceName[
   !grepl("World Health Organization|Pan American", tycho_check$SourceName)
-]) # only Thailand data are from MOH
+]) # countries with MOH data included in TYCHO
 
-# quick look at thailand data
-dup_tycho %>%
-  filter(double == TRUE & dup_tycho == TRUE & adm_0_name == "THAILAND") %>%
+# Extract country names where MOH data is present in TYCHO
+c_tycho <- unique(tycho_check$adm_0_name[
+  !grepl("World Health Organization|Pan American", tycho_check$SourceName)
+])
+
+x <- dup_tycho %>%
+  filter(double == TRUE & dup_tycho == TRUE &
+           adm_0_name %in% c_tycho) %>%
   group_by(
     full_name,
     calendar_start_date,
@@ -1719,19 +1709,26 @@ dup_tycho %>%
   tally() %>%
   print(n = 50)
 
-# for now, ok to ignore TYCHO original source names (cos there is no difference in dengue counts between different sources in Thailand)
+# Quick visualisation of overlapping data sources
+x %>%
+  # filter(full_name == "THAILAND")%>%
+  ggplot()+
+  geom_line(aes(x=as.Date(calendar_start_date), y = dengue_total, color = source_cat))+
+  geom_point(aes(x=as.Date(calendar_start_date), y = dengue_total, color = source_cat))+
+  facet_wrap(full_name~., scales="free")
+
+# MOH is given highest priority (4), followed by WHO (3), TYCHO (2), and Literature (1)
+# If TYCHO data for a country is actually sourced from MOH, treat it with highest priority
 od <- od %>%
   mutate(
-    source_cat2 = ifelse(
-      source_cat == "MOH",
-      4,
-      ifelse(
-        grepl("WHO", source_cat),
-        3,
-        ifelse(source_cat == "LITERATURE", 1, 2)
-      )
-    )
+    source_cat2 = ifelse(source_cat == "MOH", 4,
+                  ifelse(grepl("WHO", source_cat), 3,
+                  ifelse(source_cat == "LITERATURE", 1, 2)))
   )
+
+od$source_cat2[od$source_cat == "TYCHO" & od$adm_0_name %in% c_tycho] <- 4
+od$source_cat2[od$source_cat == "MOH" & od$adm_0_name %in% c_tycho] <- 5
+
 
 
 # find and remove duplicated rows
@@ -1753,7 +1750,7 @@ dup1 <- od %>%
 dup2 <- od %>%
   group_by(full_name, calendar_start_date, calendar_end_date) %>%
   filter(double == TRUE & source_cat2 < max(source_cat2)) %>%
-  ungroup() # 9837 obs to be removed
+  ungroup() # 9900 obs to be removed
 
 # remove duplicated rows
 od <- od %>%
@@ -1824,13 +1821,17 @@ summary_by_uuid <- diff_uuid %>%
     .groups = "drop"
   )
 
-# visualising differences bewtween data sources:
+# visualising differences between data sources:
 diff_uuid %>%
-  #filter(adm_0_name == "PERU")%>%
+  filter(adm_0_name == "AFGHANISTAN")%>%
+  group_by(adm_0_name, calendar_start_date, UUID)%>%
+  summarise(dengue_total = sum(dengue_total, na.rm=T))%>%
   ggplot()+
-  geom_line(aes(x= as.Date(calendar_start_date), y = dengue_total, color = UUID))+
-  geom_point(aes(x= as.Date(calendar_start_date), y = dengue_total, color = UUID))+
+  geom_line(aes(x= ymd(calendar_start_date), y = dengue_total, color = UUID, group=UUID))+
+  geom_point(aes(x= ymd(calendar_start_date), y = dengue_total, color = UUID, group = UUID))+
+  scale_x_date(date_labels = "%Y-%m")+
   facet_wrap(adm_0_name~., scales="free")
+
 
 # in this part I manually reviewed the records in summary_by_uuid + visualisation and see if the differences between data sources are understandable
 # If not, likely errors from the data extraction stage
@@ -1841,13 +1842,16 @@ diff_uuid %>%
 od <- od %>%
   filter(!UUID == "WHOEMRO-PAK-2013-Y01-00")
 
-dup3 <- od %>% # remove the smaller counts
+to_keep <- od %>%
+  filter(diff != "unique") %>%
   group_by(full_name, calendar_start_date, calendar_end_date) %>%
-  filter(diff != "unique" & dengue_total == min(dengue_total)) %>%
+  filter(dengue_total == max(dengue_total, na.rm = TRUE)) %>%
+  slice(1) %>%  # keep just one if there are ties
   ungroup()
 
+# Filter od to keep only those rows
 od <- od %>%
-  filter(!rowid %in% dup3$rowid)
+  filter(rowid %in% to_keep$rowid | diff == "unique")
 
 # different full_name but same FAO_GAUL_code and same dengue counts (e.g., adm2 for Thailand)
 dup4 <- od %>%
@@ -1860,6 +1864,8 @@ dup4 <- od %>%
   ) %>%
   filter(n() > 1 & n_distinct(UUID) > 1) %>%
   filter(source_cat2 < max(source_cat2)) %>%
+  arrange(desc(source_cat2), UUID) %>%
+  slice_head(n = 1) %>%  # Take the first row in case of tie
   ungroup()
 
 od <- od %>%
@@ -1888,6 +1894,8 @@ dup6 <- od %>%
   group_by(FAO_GAUL_code, calendar_start_date, calendar_end_date) %>%
   filter(n() > 1 & n_distinct(UUID) > 1) %>%
   filter(source_cat2 < max(source_cat2)) %>%
+  arrange(desc(source_cat2), UUID) %>%
+  slice_head(n = 1) %>%  # Take the first row in case of tie
   ungroup()
 
 od <- od %>%
@@ -1925,22 +1933,22 @@ writexl::write_xlsx(f, filename_fd)
 write.csv(meta_public, filename_sd, row.names = F)
 
 
-# 2831456 obs (including brazil adm2)
-od <- od %>% select(-(rowid:error))
+# 2835465 obs
+od <- od %>% select(-(rowid:diff))
 
 
-write.csv(od, paste0(git_path, "open_dengue_1.3/od_duplicate_removed.csv"), row.names = F)
+write.csv(od, paste0(dev_path, "open_dengue_1.3/output/od_duplicate_removed.csv"), row.names = F)
 # #
 
 # EXTRACT builders ===========================================
 
-od <- read.csv(paste0(git_path, "open_dengue_1.3/od_duplicate_removed.csv"))
-
-od$S_res <- ifelse(
-  od$adm_0_name == "BRAZIL" & grepl("MOH", od$UUID),
-  "Admin2",
-  od$S_res
-)
+od <- read.csv(paste0(dev_path, "open_dengue_1.3/output/od_duplicate_removed.csv"))
+unique(od$S_res[od$adm_0_name == "BRAZIL" & grepl("MOH", od$UUID)])
+# od$S_res <- ifelse(
+#   od$adm_0_name == "BRAZIL" & grepl("MOH", od$UUID),
+#   "Admin2",
+#   od$S_res
+# )
 
 adm0_codes <- od[
   od$S_res == "Admin0",
@@ -1953,7 +1961,6 @@ adm0_codes %>%
   mutate(n = n_distinct(adm_0_name))%>%
   filter(n >1)
 
-od$adm_0_name[od$adm_0_name == "LAOS"] <- "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
 
 # adm0_codes <- rbind(adm0_codes,
 #                     data.frame = c("COLOMBIA", 57, "COL"))
@@ -2028,7 +2035,6 @@ all_sum <- all_sum %>%
   mutate(
     S_res_n = ifelse(S_res == "a0_sum", 2, ifelse(S_res == "a1_sum", 1, 0))
   ) %>%
-
   slice_max(order_by = T_res_n) %>%
   slice_max(order_by = S_res_n)
 
@@ -2038,11 +2044,13 @@ od_adm0_new <- subset(
   (with(od_adm0, paste0(country_year, T_res)) %in%
     with(all_sum[all_sum$S_res == "a0_sum", ], paste0(country_year, T_res)))
 )
+
 od_adm1_new <- subset(
   od_adm1,
   (with(od_adm1, paste0(country_year, T_res)) %in%
     with(all_sum[all_sum$S_res == "a1_sum", ], paste0(country_year, T_res)))
 )
+
 od_adm2_new <- subset(
   od_adm2,
   (with(od_adm2, paste0(country_year, T_res)) %in%
@@ -2075,11 +2083,11 @@ check <- merge(od_adm1_new, adm0_codes, by = c("adm_0_name"), all.x = T) %>%
   group_by(calendar_start_date, UUID, dengue_total) %>%
   tally()
 
+uuid_to_remove <- unique(check$UUID)[2]
+
 od_adm1_new <- od_adm1_new[
-  !((od_adm1_new$UUID == check$UUID[check$n == 1]) &
-    (od_adm1_new$calendar_start_date ==
-      check$calendar_start_date[check$n == 1])),
-]
+  !((od_adm1_new$UUID == uuid_to_remove) &
+    (od_adm1_new$calendar_start_date %in% unique(check$calendar_start_date))),]
 
 # standardise the adm0 codes
 od_adm1_new <- merge(
@@ -2095,6 +2103,11 @@ od_adm1_new <- merge(
 od_adm1_new %>%
   group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
   filter(n() > 1)
+
+od_adm1_new <- od_adm1_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
+  arrange(UUID)%>%
+  slice_head(n = 1)
 
 # same again but for adm2 data
 od_adm2_new <- od_adm2_new %>%
@@ -2120,6 +2133,15 @@ check2 <- merge(od_adm2_new, adm0_codes, by = c("adm_0_name"), all.x = T) %>%
 
 nrow(check2)
 
+# remove duplicates
+# choose one of duplicates to remove
+uuid_to_remove <- unique(check2$UUID)[2]
+
+od_adm2_new <- od_adm2_new[
+  !((od_adm2_new$UUID == uuid_to_remove) &
+    (od_adm2_new$calendar_start_date %in% unique(check2$calendar_start_date))),]
+
+
 od_adm2_new <- merge(
   od_adm2_new,
   adm0_codes,
@@ -2134,6 +2156,11 @@ od_adm2_new %>%
   group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
   filter(n() > 1)
 
+od_adm2_new <- od_adm2_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date)%>%
+  arrange(UUID)%>%
+  slice_head(n = 1)
+
 # merge everything
 od_adm0_new <- rbind(od_adm0_new, od_adm1_new)
 od_adm0_new <- rbind(od_adm0_new, od_adm2_new)
@@ -2145,10 +2172,13 @@ od_adm0_new = od_adm0_new[
 ]
 
 # final check
+od_adm0_new <- od_adm0_new %>%
+  group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
+  slice_max(dengue_total, with_ties = FALSE)
+
 od_adm0_new %>%
   group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
-  filter(n() > 1)
-
+  filter(n()>1)
 
 # save national extract
 
@@ -2259,14 +2289,18 @@ for (c in 1:length(ctr)) {
   }
 }
 
-nrow(toadd_mix) # 10990
-nrow(toadd_national_only) # 15330
+nrow(toadd_mix) # 14151
+nrow(toadd_national_only) # 22726
 
 # combine and sort
 spatial_extract <- rbind(od_adm2, toadd_national_only, toadd_mix)
 spatial_extract = spatial_extract[
   order(spatial_extract$adm_0_name, spatial_extract$calendar_start_date),
 ]
+
+spatial_extract %>%
+  group_by(full_name, calendar_start_date, calendar_end_date)%>%
+  filter(n()>1)
 
 write.csv(
   spatial_extract,
@@ -2442,7 +2476,9 @@ temporal_extract = temporal_extract[
   order(temporal_extract$adm_0_name, temporal_extract$calendar_start_date),
 ]
 
-
+temporal_extract %>%
+  group_by(full_name, calendar_start_date, calendar_end_date)%>%
+  filter(n()>1)
 
 write.csv(
   temporal_extract,
@@ -2493,11 +2529,11 @@ length(unique(temporal_extract$adm_0_name[temporal_extract$S_res != "Admin0"]))
 
 od_old <- read.csv(paste0(
   git_path,
-  "data/releases/V1.2.2/Temporal_extract_V1_2_2.csv"
+  "data/releases/V1.2.2/National_extract_V1_2_2.csv"
 ))
 od_new <- read.csv(paste0(
   git_path,
-  "/data/releases/V1.3/Temporal_extract_V1_3.csv"
+  "/data/releases/V1.3/National_extract_V1_3.csv"
 ))
 
 # total number of countries
