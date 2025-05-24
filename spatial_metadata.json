@@ -1,0 +1,662 @@
+[
+  {
+    "adm_0_name": "AFGHANISTAN",
+    "start_date": "2021-09-05",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "AMERICAN SAMOA",
+    "start_date": "1955-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "ANGOLA",
+    "start_date": "2024-01-01",
+    "end_date": "2025-02-28"
+  },
+  {
+    "adm_0_name": "ANGUILLA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "ANTIGUA AND BARBUDA",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "ARGENTINA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "ARUBA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "AUSTRALIA",
+    "start_date": "1979-01-01",
+    "end_date": "2025-04-30"
+  },
+  {
+    "adm_0_name": "BAHAMAS",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BANGLADESH",
+    "start_date": "1980-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "BARBADOS",
+    "start_date": "1977-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BELIZE",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BENIN",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "BERMUDA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BHUTAN",
+    "start_date": "1985-01-01",
+    "end_date": "2024-10-31"
+  },
+  {
+    "adm_0_name": "BOLIVIA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BONAIRE, SAINT EUSTATIUS AND SABA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BRAZIL",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "BRUNEI DARUSSALAM",
+    "start_date": "1995-01-01",
+    "end_date": "2017-12-31"
+  },
+  {
+    "adm_0_name": "BURKINA FASO",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "CABO VERDE",
+    "start_date": "2023-11-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "CAMBODIA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "CAMEROON",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "CANADA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "CAYMAN ISLANDS",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "CENTRAL AFRICAN REPUBLIC",
+    "start_date": "2024-01-01",
+    "end_date": "2024-09-30"
+  },
+  {
+    "adm_0_name": "CHAD",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "CHILE",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "CHINA",
+    "start_date": "1979-01-01",
+    "end_date": "2025-02-28"
+  },
+  {
+    "adm_0_name": "COLOMBIA",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "COOK ISLANDS",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "COSTA RICA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "COTE D'IVOIRE",
+    "start_date": "2023-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "CUBA",
+    "start_date": "1977-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "CURACAO",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "DOMINICA",
+    "start_date": "1962-01-01",
+    "end_date": "2023-12-31"
+  },
+  {
+    "adm_0_name": "DOMINICAN REPUBLIC",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "ECUADOR",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "EL SALVADOR",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "ERITREA",
+    "start_date": "2024-01-01",
+    "end_date": "2025-02-28"
+  },
+  {
+    "adm_0_name": "ETHIOPIA",
+    "start_date": "2023-04-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "FIJI",
+    "start_date": "1971-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "FRANCE",
+    "start_date": "2008-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "FRENCH GUIANA",
+    "start_date": "1973-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "FRENCH POLYNESIA",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "GHANA",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "GRENADA",
+    "start_date": "1969-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "GUADELOUPE",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "GUAM",
+    "start_date": "1983-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "GUATEMALA",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "GUINEA",
+    "start_date": "2024-01-01",
+    "end_date": "2024-07-31"
+  },
+  {
+    "adm_0_name": "GUYANA",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "HAITI",
+    "start_date": "1972-01-01",
+    "end_date": "2022-12-31"
+  },
+  {
+    "adm_0_name": "HONDURAS",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "HONG KONG",
+    "start_date": "1994-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "INDIA",
+    "start_date": "1991-01-01",
+    "end_date": "2025-01-31"
+  },
+  {
+    "adm_0_name": "INDONESIA",
+    "start_date": "1968-01-01",
+    "end_date": "2024-10-31"
+  },
+  {
+    "adm_0_name": "ITALY",
+    "start_date": "2008-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "JAMAICA",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "JAPAN",
+    "start_date": "1999-01-01",
+    "end_date": "2019-12-31"
+  },
+  {
+    "adm_0_name": "KENYA",
+    "start_date": "2024-01-01",
+    "end_date": "2025-02-28"
+  },
+  {
+    "adm_0_name": "KIRIBATI",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "start_date": "1979-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "MACAU",
+    "start_date": "2000-01-01",
+    "end_date": "2018-12-31"
+  },
+  {
+    "adm_0_name": "MALAYSIA",
+    "start_date": "1963-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "MALDIVES",
+    "start_date": "1985-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "MALI",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "MARSHALL ISLANDS",
+    "start_date": "1989-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "MARTINIQUE",
+    "start_date": "1975-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "MAURITANIA",
+    "start_date": "2023-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "MAURITIUS",
+    "start_date": "2023-12-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "MAYOTTE",
+    "start_date": "2024-01-01",
+    "end_date": "2024-10-31"
+  },
+  {
+    "adm_0_name": "MEXICO",
+    "start_date": "1971-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "MICRONESIA (FEDERATED STATES OF)",
+    "start_date": "1993-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "MONGOLIA",
+    "start_date": "2000-01-01",
+    "end_date": "2015-12-31"
+  },
+  {
+    "adm_0_name": "MONTSERRAT",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "MYANMAR",
+    "start_date": "1970-01-01",
+    "end_date": "2025-02-28"
+  },
+  {
+    "adm_0_name": "NAURU",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "NEPAL",
+    "start_date": "1985-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "NEW CALEDONIA",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "NEW ZEALAND",
+    "start_date": "1988-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "NICARAGUA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "NIGER",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "NIUE",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "NORTHERN MARIANA ISLANDS",
+    "start_date": "1992-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "OMAN",
+    "start_date": "2001-01-01",
+    "end_date": "2023-12-31"
+  },
+  {
+    "adm_0_name": "PAKISTAN",
+    "start_date": "1994-01-01",
+    "end_date": "2025-01-31"
+  },
+  {
+    "adm_0_name": "PALAU",
+    "start_date": "1988-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "PANAMA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "PAPUA NEW GUINEA",
+    "start_date": "1981-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "PARAGUAY",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "PERU",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "PHILIPPINES",
+    "start_date": "1955-01-01",
+    "end_date": "2023-11-25"
+  },
+  {
+    "adm_0_name": "PITCAIRN",
+    "start_date": "2000-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "PUERTO RICO",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "REUNION",
+    "start_date": "2024-01-01",
+    "end_date": "2025-01-31"
+  },
+  {
+    "adm_0_name": "SAINT BARTHELEMY",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SAINT KITTS AND NEVIS",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SAINT LUCIA",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SAINT MARTIN",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SAINT VINCENT AND THE GRENADINES",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SAMOA",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "SAO TOME AND PRINCIPE",
+    "start_date": "2023-04-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SAUDI ARABIA",
+    "start_date": "1990-01-01",
+    "end_date": "2024-08-31"
+  },
+  {
+    "adm_0_name": "SENEGAL",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SEYCHELLES",
+    "start_date": "2023-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SINGAPORE",
+    "start_date": "1960-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SINT MAARTEN",
+    "start_date": "2004-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "SOLOMON ISLANDS",
+    "start_date": "1991-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "SPAIN",
+    "start_date": "2008-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SRI LANKA",
+    "start_date": "1965-01-01",
+    "end_date": "2024-08-31"
+  },
+  {
+    "adm_0_name": "SUDAN",
+    "start_date": "2019-07-28",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "SURINAME",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "TAIWAN",
+    "start_date": "1990-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "THAILAND",
+    "start_date": "1958-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "TIMOR-LESTE",
+    "start_date": "1985-01-01",
+    "end_date": "2024-10-31"
+  },
+  {
+    "adm_0_name": "TOGO",
+    "start_date": "2023-09-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "TOKELAU",
+    "start_date": "1982-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "TONGA",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "TRINIDAD AND TOBAGO",
+    "start_date": "1978-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "TURKS AND CAICOS ISLANDS",
+    "start_date": "1974-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "TUVALU",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "UNITED REPUBLIC OF TANZANIA",
+    "start_date": "2024-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "UNITED STATES OF AMERICA",
+    "start_date": "1924-01-20",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "URUGUAY",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "VANUATU",
+    "start_date": "1979-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "VENEZUELA",
+    "start_date": "1960-01-01",
+    "end_date": "2023-12-31"
+  },
+  {
+    "adm_0_name": "VIET NAM",
+    "start_date": "1960-01-01",
+    "end_date": "2025-03-31"
+  },
+  {
+    "adm_0_name": "VIRGIN ISLANDS (UK)",
+    "start_date": "1960-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "VIRGIN ISLANDS (US)",
+    "start_date": "1980-01-01",
+    "end_date": "2024-12-31"
+  },
+  {
+    "adm_0_name": "WALLIS AND FUTUNA",
+    "start_date": "1991-01-01",
+    "end_date": "2024-12-28"
+  },
+  {
+    "adm_0_name": "YEMEN",
+    "start_date": "2015-01-01",
+    "end_date": "2024-07-27"
+  }
+]
