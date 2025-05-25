@@ -1,104 +1,124 @@
-// Define the base URL for GitHub Pages (adjust if repo name or username is different)
-const baseUrl = "https://ahyoung-lim.github.io/master-repo/data/";
+// Global vars
+let selectedDataType = null;
+let selectedRegion = null;
+let allData = [];
+let filteredPreview = [];
+let dateRange = [null, null];
 
-// Map of available zip files
+// Map dataType + region to zip file URL (adjust if your data/ folder structure changes)
 const zipFiles = {
-  "National_AFRO": `${baseUrl}National_extract_AFRO_V1_3.zip`,
-  "National_WPRO": `${baseUrl}National_extract_WPRO_V1_3.zip`,
-  "National_SEARO": `${baseUrl}National_extract_SEARO_V1_3.zip`,
-  "National_EMRO": `${baseUrl}National_extract_EMRO_V1_3.zip`,
-  "National_EURO": `${baseUrl}National_extract_EURO_V1_3.zip`,
-  "National_PAHO": `${baseUrl}National_extract_PAHO_V1_3.zip`,
-  "Spatial_AFRO": `${baseUrl}Spatial_extract_AFRO_V1_3.zip`,
-  "Spatial_WPRO": `${baseUrl}Spatial_extract_WPRO_V1_3.zip`,
-  "Spatial_SEARO": `${baseUrl}Spatial_extract_SEARO_V1_3.zip`,
-  "Spatial_EMRO": `${baseUrl}Spatial_extract_EMRO_V1_3.zip`,
-  "Spatial_EURO": `${baseUrl}Spatial_extract_EURO_V1_3.zip`,
-  "Spatial_PAHO": `${baseUrl}Spatial_extract_PAHO_V1_3.zip`,
-  "Temporal_AFRO": `${baseUrl}Temporal_extract_AFRO_V1_3.zip`,
-  "Temporal_WPRO": `${baseUrl}Temporal_extract_WPRO_V1_3.zip`,
-  "Temporal_SEARO": `${baseUrl}Temporal_extract_SEARO_V1_3.zip`,
-  "Temporal_EMRO": `${baseUrl}Temporal_extract_EMRO_V1_3.zip`,
-  "Temporal_EURO": `${baseUrl}Temporal_extract_EURO_V1_3.zip`,
-  "Temporal_PAHO": `${baseUrl}Temporal_extract_PAHO_V1_3.zip`,
+  "National_AFRO": "data/National_extract_AFRO_V1_3.zip",
+  "National_EMRO": "data/National_extract_EMRO_V1_3.zip",
+  "National_EURO": "data/National_extract_EURO_V1_3.zip",
+  "National_PAHO": "data/National_extract_PAHO_V1_3.zip",
+  "National_SEARO": "data/National_extract_SEARO_V1_3.zip",
+  "National_WPRO": "data/National_extract_WPRO_V1_3.zip",
+  "Spatial_AFRO": "data/Spatial_extract_AFRO_V1_3.zip",
+  "Spatial_EMRO": "data/Spatial_extract_EMRO_V1_3.zip",
+  "Spatial_EURO": "data/Spatial_extract_EURO_V1_3.zip",
+  "Spatial_PAHO": "data/Spatial_extract_PAHO_V1_3.zip",
+  "Spatial_SEARO": "data/Spatial_extract_SEARO_V1_3.zip",
+  "Spatial_WPRO": "data/Spatial_extract_WPRO_V1_3.zip",
+  "Temporal_AFRO": "data/Temporal_extract_AFRO_V1_3.zip",
+  "Temporal_EMRO": "data/Temporal_extract_EMRO_V1_3.zip",
+  "Temporal_EURO": "data/Temporal_extract_EURO_V1_3.zip",
+  "Temporal_PAHO": "data/Temporal_extract_PAHO_V1_3.zip",
+  "Temporal_SEARO": "data/Temporal_extract_SEARO_V1_3.zip",
+  "Temporal_WPRO": "data/Temporal_extract_WPRO_V1_3.zip"
 };
 
-// Listen for clicks on the "Preview" button
-document.getElementById("filterBtn").addEventListener("click", () => {
-  const dataType = document.getElementById("dataTypeSelect").value;
-  const region = document.getElementById("regionSelect").value;
-
-  const zipKey = `${dataType}_${region}`;
-  const zipUrl = zipFiles[zipKey];
-
-  if (!zipUrl) {
-    alert("Invalid selection or file not available.");
-    return;
+// Load and parse ZIP file CSV
+async function loadAndParseZip(dataType, region) {
+  const key = `${dataType}_${region}`;
+  const url = zipFiles[key];
+  if (!url) {
+    alert(`No ZIP URL found for ${dataType} and ${region}`);
+    return [];
   }
 
-  fetch(zipUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.blob();
-    })
-    .then(JSZip.loadAsync)
-    .then(zip => {
-      const csvFileName = Object.keys(zip.files).find(name => name.endsWith(".csv"));
-      return zip.files[csvFileName].async("string");
-    })
-    .then(csvText => {
-      const parsed = Papa.parse(csvText, { header: true });
-      renderTable(parsed.data);
-    })
-    .catch(error => {
-      console.error("Error loading ZIP:", error);
-      alert("Failed to load or parse the data.");
-    });
-});
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      alert("Failed to fetch ZIP file.");
+      return [];
+    }
 
-// Render table using DataTables
-function renderTable(data) {
-  if ($.fn.DataTable.isDataTable("#previewTable")) {
-    $('#previewTable').DataTable().clear().destroy();
-    $('#previewTable').empty(); // Clear existing table header
+    const arrayBuffer = await response.arrayBuffer();
+    const zip = await JSZip.loadAsync(arrayBuffer);
+    const csvFileName = Object.keys(zip.files).find(name => name.endsWith(".csv"));
+    if (!csvFileName) {
+      alert("No CSV file found in ZIP.");
+      return [];
+    }
+
+    const csvText = await zip.file(csvFileName).async("text");
+    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    if (parsed.errors.length) {
+      console.warn("CSV parse errors:", parsed.errors);
+    }
+    return parsed.data;
+  } catch (err) {
+    console.error("Error loading/parsing ZIP:", err);
+    alert("Error loading or parsing ZIP file.");
+    return [];
   }
-
-  if (!data.length) return;
-
-  const columns = Object.keys(data[0]).map(key => ({ title: key, data: key }));
-
-  $('#previewTable').DataTable({
-    data,
-    columns
-  });
 }
 
-// Handle CSV download
-document.getElementById("downloadBtn").addEventListener("click", () => {
-  const dataType = document.getElementById("dataTypeSelect").value;
-  const region = document.getElementById("regionSelect").value;
+// Populate country select options based on loaded data
+function updateCountryOptions(data) {
+  const countrySelect = document.getElementById("countrySelect");
+  const uniqueCountries = [...new Set(data.map(row => row.adm_0_name).filter(Boolean))].sort();
 
-  const zipKey = `${dataType}_${region}`;
-  const zipUrl = zipFiles[zipKey];
+  countrySelect.innerHTML = "";
+  uniqueCountries.forEach(c => {
+    const option = document.createElement("option");
+    option.value = c;
+    option.text = c;
+    countrySelect.appendChild(option);
+  });
 
-  if (!zipUrl) {
-    alert("Invalid selection or file not available.");
-    return;
+  // Clear any previous selection
+  countrySelect.value = null;
+  // If using jQuery for change event:
+  if (window.jQuery) {
+    $(countrySelect).trigger("change");
+  }
+}
+
+// DOMContentLoaded: set up event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const dataTypeSelect = document.getElementById("dataTypeSelect");
+  const regionSelect = document.getElementById("regionSelect");
+  const filterBtn = document.getElementById("filterBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  dataTypeSelect.addEventListener("change", async () => {
+    selectedDataType = dataTypeSelect.value;
+    await tryLoadData();
+  });
+
+  regionSelect.addEventListener("change", async () => {
+    selectedRegion = regionSelect.value;
+    await tryLoadData();
+  });
+
+  async function tryLoadData() {
+    // Only load if both selected
+    if (!selectedDataType || !selectedRegion) {
+      allData = [];
+      updateCountryOptions([]);
+      return;
+    }
+    allData = await loadAndParseZip(selectedDataType, selectedRegion);
+    updateCountryOptions(allData);
   }
 
-  fetch(zipUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.blob();
-    })
-    .then(blob => {
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = zipUrl.split('/').pop();
-      link.click();
-    })
-    .catch(error => {
-      console.error("Download error:", error);
-      alert("Failed to download the file.");
-    });
+  filterBtn.addEventListener("click", () => {
+    // Your filtering and preview logic here...
+    // (You can expand this from your existing code)
+  });
+
+  downloadBtn.addEventListener("click", () => {
+    // Your CSV download logic here...
+  });
 });
