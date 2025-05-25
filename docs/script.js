@@ -5,26 +5,26 @@ let allData = [];
 let filteredPreview = [];
 let dateRange = [null, null];
 
-// Map dataType + region to zip file URL (adjust if your data/ folder structure changes)
+// Map dataType + region to zip file URL (adjust if your resources/ folder structure changes)
 const zipFiles = {
-  "National_AFRO": "data/National_extract_AFRO_V1_3.zip",
-  "National_EMRO": "data/National_extract_EMRO_V1_3.zip",
-  "National_EURO": "data/National_extract_EURO_V1_3.zip",
-  "National_PAHO": "data/National_extract_PAHO_V1_3.zip",
-  "National_SEARO": "data/National_extract_SEARO_V1_3.zip",
-  "National_WPRO": "data/National_extract_WPRO_V1_3.zip",
-  "Spatial_AFRO": "data/Spatial_extract_AFRO_V1_3.zip",
-  "Spatial_EMRO": "data/Spatial_extract_EMRO_V1_3.zip",
-  "Spatial_EURO": "data/Spatial_extract_EURO_V1_3.zip",
-  "Spatial_PAHO": "data/Spatial_extract_PAHO_V1_3.zip",
-  "Spatial_SEARO": "data/Spatial_extract_SEARO_V1_3.zip",
-  "Spatial_WPRO": "data/Spatial_extract_WPRO_V1_3.zip",
-  "Temporal_AFRO": "data/Temporal_extract_AFRO_V1_3.zip",
-  "Temporal_EMRO": "data/Temporal_extract_EMRO_V1_3.zip",
-  "Temporal_EURO": "data/Temporal_extract_EURO_V1_3.zip",
-  "Temporal_PAHO": "data/Temporal_extract_PAHO_V1_3.zip",
-  "Temporal_SEARO": "data/Temporal_extract_SEARO_V1_3.zip",
-  "Temporal_WPRO": "data/Temporal_extract_WPRO_V1_3.zip"
+  "National_AFRO": "resources/National_extract_AFRO_V1_3.zip",
+  "National_EMRO": "resources/National_extract_EMRO_V1_3.zip",
+  "National_EURO": "resources/National_extract_EURO_V1_3.zip",
+  "National_PAHO": "resources/National_extract_PAHO_V1_3.zip",
+  "National_SEARO": "resources/National_extract_SEARO_V1_3.zip",
+  "National_WPRO": "resources/National_extract_WPRO_V1_3.zip",
+  "Spatial_AFRO": "resources/Spatial_extract_AFRO_V1_3.zip",
+  "Spatial_EMRO": "resources/Spatial_extract_EMRO_V1_3.zip",
+  "Spatial_EURO": "resources/Spatial_extract_EURO_V1_3.zip",
+  "Spatial_PAHO": "resources/Spatial_extract_PAHO_V1_3.zip",
+  "Spatial_SEARO": "resources/Spatial_extract_SEARO_V1_3.zip",
+  "Spatial_WPRO": "resources/Spatial_extract_WPRO_V1_3.zip",
+  "Temporal_AFRO": "resources/Temporal_extract_AFRO_V1_3.zip",
+  "Temporal_EMRO": "resources/Temporal_extract_EMRO_V1_3.zip",
+  "Temporal_EURO": "resources/Temporal_extract_EURO_V1_3.zip",
+  "Temporal_PAHO": "resources/Temporal_extract_PAHO_V1_3.zip",
+  "Temporal_SEARO": "resources/Temporal_extract_SEARO_V1_3.zip",
+  "Temporal_WPRO": "resources/Temporal_extract_WPRO_V1_3.zip"
 };
 
 // Load and parse ZIP file CSV
