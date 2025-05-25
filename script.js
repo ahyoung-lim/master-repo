@@ -7,26 +7,26 @@ let filteredPreview = [];
 
 // Map your data type + region to ZIP file URLs on your GitHub Pages site
 const zipFiles = {
-  "Temporal_AFRO": "data/releases/V1.3/Temporal_extract_AFRO_V1_3.zip",
-  "Temporal_EMRO": "data/releases/V1.3/Temporal_extract_EMRO_V1_3.zip",
-  "Temporal_EURO": "data/releases/V1.3/Temporal_extract_EURO_V1_3.zip",
-  "Temporal_PAHO": "data/releases/V1.3/Temporal_extract_PAHO_V1_3.zip",
-  "Temporal_SEARO": "data/releases/V1.3/Temporal_extract_SEARO_V1_3.zip",
-  "Temporal_WPRO": "data/releases/V1.3/Temporal_extract_WPRO_V1_3.zip",
+  "Temporal_AFRO": "data/Temporal_extract_AFRO_V1_3.zip",
+  "Temporal_EMRO": "data/Temporal_extract_EMRO_V1_3.zip",
+  "Temporal_EURO": "data/Temporal_extract_EURO_V1_3.zip",
+  "Temporal_PAHO": "data/Temporal_extract_PAHO_V1_3.zip",
+  "Temporal_SEARO": "data/Temporal_extract_SEARO_V1_3.zip",
+  "Temporal_WPRO": "data/Temporal_extract_WPRO_V1_3.zip",
 
-  "Spatial_AFRO": "data/releases/V1.3/Spatial_extract_AFRO_V1_3.zip",
-  "Spatial_EMRO": "data/releases/V1.3/Spatial_extract_EMRO_V1_3.zip",
-  "Spatial_EURO": "data/releases/V1.3/Spatial_extract_EURO_V1_3.zip",
-  "Spatial_PAHO": "data/releases/V1.3/Spatial_extract_PAHO_V1_3.zip",
-  "Spatial_SEARO": "data/releases/V1.3/Spatial_extract_SEARO_V1_3.zip",
-  "Spatial_WPRO": "data/releases/V1.3/Spatial_extract_WPRO_V1_3.zip",
+  "Spatial_AFRO": "data/Spatial_extract_AFRO_V1_3.zip",
+  "Spatial_EMRO": "data/Spatial_extract_EMRO_V1_3.zip",
+  "Spatial_EURO": "data/Spatial_extract_EURO_V1_3.zip",
+  "Spatial_PAHO": "data/Spatial_extract_PAHO_V1_3.zip",
+  "Spatial_SEARO": "data/Spatial_extract_SEARO_V1_3.zip",
+  "Spatial_WPRO": "data/Spatial_extract_WPRO_V1_3.zip",
 
-  "National_AFRO": "data/releases/V1.3/National_extract_AFRO_V1_3.zip",
-  "National_EMRO": "data/releases/V1.3/National_extract_EMRO_V1_3.zip",
-  "National_EURO": "data/releases/V1.3/National_extract_EURO_V1_3.zip",
-  "National_PAHO": "data/releases/V1.3/National_extract_PAHO_V1_3.zip",
-  "National_SEARO": "data/releases/V1.3/National_extract_SEARO_V1_3.zip",
-  "National_WPRO": "data/releases/V1.3/National_extract_WPRO_V1_3.zip"
+  "National_AFRO": "data/National_extract_AFRO_V1_3.zip",
+  "National_EMRO": "data/National_extract_EMRO_V1_3.zip",
+  "National_EURO": "data/National_extract_EURO_V1_3.zip",
+  "National_PAHO": "data/National_extract_PAHO_V1_3.zip",
+  "National_SEARO": "data/National_extract_SEARO_V1_3.zip",
+  "National_WPRO": "data/National_extract_WPRO_V1_3.zip"
 };
 
 // Util: convert filtered data array to CSV string
