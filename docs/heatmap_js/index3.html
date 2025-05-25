@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Heatmap Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* bg-slate-50 */
+            color: #334155; /* text-slate-700 */
+            padding-top: 20px;
+            padding-bottom: 40px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 24px !important;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 1400px !important;
+            margin: 20px auto !important;
+            box-sizing: border-box;
+        }
+
+        .summary-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        .summary-panel::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .summary-panel::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        .summary-panel::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .summary-new-country { color: #D97706; font-weight: 600; }
+        .summary-new-tile { color: #DC2626; font-weight: 600; }
+        .summary-improved-res { color: #2563EB; font-weight: 600; }
+
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 bg-transparent shadow-none max-w-none">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-slate-800">OpenDengue Data Overview</h1>
+            <p class="text-lg text-slate-600 mt-1">Visualise temporal and spatial data availability across regions and versions</p>
+        </header>
+
+        <div class="controls-wrapper bg-white p-6 rounded-lg shadow-lg mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="controls-container flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+                    <div>
+                        <label for="regionSelect" class="block text-sm font-medium text-slate-700 mb-1">Region:</label>
+                        <select id="regionSelect" class="w-full sm:w-auto p-2 border border-slate-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="PAHO">PAHO</option>
+                            <option value="WPRO">WPRO</option>
+                            <option value="SEARO">SEARO</option>
+                            <option value="EMRO">EMRO</option>
+                            <option value="AFRO">AFRO</option>
+                            <option value="EURO">EURO</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="resolutionTypeSelect" class="block text-sm font-medium text-slate-700 mb-1">Heatmap Shows:</label>
+                        <select id="resolutionTypeSelect" class="w-full sm:w-auto p-2 border border-slate-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="Temporal">Temporal Resolution</option>
+                            <option value="Spatial">Spatial Resolution</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="version-controls-container flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+                    <div>
+                        <label for="currentVersionSelect" class="block text-sm font-medium text-slate-700 mb-1">Display Version:</label>
+                        <select id="currentVersionSelect" class="w-full sm:w-auto p-2 border border-slate-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></select>
+                    </div>
+                    <div class="flex items-center pt-5 sm:pt-0">
+                        <input type="checkbox" id="enableComparison" class="h-5 w-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500 mr-2">
+                        <label for="enableComparison" class="text-sm font-medium text-slate-700">Enable Comparison</label>
+                    </div>
+                    <div id="previousVersionControlSpan" class="previous-version-control" style="display: none;">
+                         <label for="previousVersionSelect" class="block text-sm font-medium text-slate-700 mb-1 sm:ml-2">Compare with:</label>
+                        <select id="previousVersionSelect" class="w-full sm:w-auto p-2 border border-slate-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content-area flex flex-col lg:flex-row gap-6">
+            <div id="heatmapDivContainer" class="flex-grow bg-white p-1 rounded-lg shadow-lg border border-slate-200">
+                 <div id="heatmapDiv" style="width: 100%; height: 780px;"></div>
+            </div>
+            <div id="summaryPanel" class="summary-panel lg:w-[320px] xl:w-[380px] flex-shrink-0 bg-white p-6 rounded-lg shadow-lg border border-slate-200" style="display: none; height: 780px; overflow-y: auto;">
+                {/* Content injected by JS */}
+            </div>
+        </div>
+
+        <div id="messageBox" class="message-box mt-6 p-4 rounded-lg shadow-md" style="display: none;">
+            {/* Content injected by JS */}
+        </div>
+    </div>
+
+    <script>
+        let sortedVersionsCache = [];
+        const TEMPORAL_LEVELS = { "Weekly": 0, "Monthly": 1, "Yearly": 2, "NA": 3 };
+        const TEMPORAL_TEXT = { 0: "Weekly", 1: "Monthly", 2: "Yearly", 3: "NA" };
+        const TEMPORAL_COLORSCALE = [ // UPDATED for better NA differentiation
+            [0.0, '#34D399'], [0.25, '#34D399'],   // Weekly (Emerald 400)
+            [0.25, '#A7F3D0'], [0.5, '#A7F3D0'],  // Monthly (Emerald 200)
+            [0.5, '#BAE6FD'], [0.75, '#BAE6FD'],  // Yearly (Sky 200 - More distinct blue)
+            [0.75, '#E5E7EB'], [1.0, '#E5E7EB']   // NA (Gray 200)
+        ];
+
+        const SPATIAL_LEVELS = { "Admin2": 0, "Admin1": 1, "Admin0": 2, "NA": 3 };
+        const SPATIAL_TEXT = { 0: "Admin2", 1: "Admin1", 2: "Admin0", 3: "NA" };
+        const SPATIAL_COLORSCALE = [ // UPDATED for better NA differentiation
+            [0.0,  '#EC4899'], [0.25, '#EC4899'], // Admin2 (Pink 500)
+            [0.25, '#F9A8D4'], [0.50, '#F9A8D4'], // Admin1 (Pink 300)
+            [0.50, '#FCE7F3'], [0.75, '#FCE7F3'], // Admin0 (Pink 100 - Lighter, distinct pink)
+            [0.75, '#E5E7EB'], [1.0,  '#E5E7EB']  // NA (Gray 200)
+        ];
+
+        function showMessage(message, type = 'info', targetDivId = 'messageBox') {
+            const box = document.getElementById(targetDivId);
+            if (!box) {
+                console.error("showMessage: Target div not found:", targetDivId);
+                return;
+            }
+            box.innerHTML = message;
+
+            let baseClasses = "";
+            let typeClasses = "";
+
+            if (targetDivId === 'summaryPanel') {
+                baseClasses = 'summary-panel lg:w-[320px] xl:w-[380px] flex-shrink-0 bg-white p-6 rounded-lg shadow-lg border border-slate-200 text-slate-700';
+            } else {
+                baseClasses = 'message-box mt-6 p-4 rounded-lg shadow-md';
+                if (type === 'error') typeClasses = 'bg-red-100 border border-red-400 text-red-700';
+                else if (type === 'info') typeClasses = 'bg-blue-100 border border-blue-400 text-blue-700';
+                else typeClasses = 'bg-sky-100 border border-sky-400 text-sky-700';
+            }
+            box.className = `${baseClasses} ${typeClasses}`;
+            box.style.display = 'block';
+        }
+
+        function hideMessage(targetDivId = 'messageBox') {
+            const box = document.getElementById(targetDivId);
+            if (box) {
+                box.style.display = 'none';
+                box.innerHTML = '';
+            }
+        }
+
+        function sortVersions(v1, v2) {
+            const parsePart = (part) => String(part).replace('V', '').split('_').map(Number);
+            const parts1 = parsePart(v1);
+            const parts2 = parsePart(v2);
+            for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+                const p1 = parts1[i] || 0;
+                const p2 = parts2[i] || 0;
+                if (p1 !== p2) return p1 - p2;
+            }
+            return 0;
+        }
+
+        function loadData() {
+            return loadCSVData();
+        }
+
+        function loadCSVData() {
+            return new Promise((resolve, reject) => {
+                Papa.parse("heatmap.csv", {
+                    download: true, header: true, dynamicTyping: true, skipEmptyLines: true,
+                    complete: function(result) {
+                        if (result.data && result.data.length > 0) {
+                            resolve(result.data);
+                        } else {
+                            const errorMsg = result.errors && result.errors.length > 0 ? result.errors[0].message : 'No data found in CSV or CSV is empty.';
+                            showMessage(`Error parsing CSV: ${errorMsg}. Ensure 'heatmap.csv' is valid and in the correct location.`, 'error');
+                            reject(new Error(errorMsg));
+                        }
+                    },
+                    error: function(err) {
+                        showMessage(`Error loading heatmap.csv: ${err.message || 'File not found or inaccessible.'}. Please ensure 'heatmap.csv' is in the same directory as this HTML file and you are running this from a local server if required by browser security.`, 'error');
+                        reject(err);
+                    }
+                });
+            });
+        }
+
+        function populateVersionDropdowns(allData, currentVersionSelectId, previousVersionSelectId) {
+            const currentDropdown = document.getElementById(currentVersionSelectId);
+            const previousDropdown = document.getElementById(previousVersionSelectId);
+            currentDropdown.innerHTML = '';
+            previousDropdown.innerHTML = '';
+
+            if (!allData || allData.length === 0) {
+                 currentDropdown.disabled = true;
+                 previousDropdown.disabled = true;
+                 return;
+            }
+            sortedVersionsCache = [...new Set(allData.map(d => String(d.version)))].sort(sortVersions);
+            sortedVersionsCache.forEach(v => {
+                currentDropdown.add(new Option(v, v));
+                previousDropdown.add(new Option(v, v));
+            });
+
+            if (sortedVersionsCache.length > 0) {
+                currentDropdown.value = sortedVersionsCache[sortedVersionsCache.length - 1];
+                updatePreviousVersionSelection();
+                currentDropdown.disabled = false;
+            } else {
+                currentDropdown.disabled = true;
+                previousDropdown.disabled = true;
+            }
+        }
+
+        function updatePreviousVersionSelection() {
+            const currentVersionSelect = document.getElementById('currentVersionSelect');
+            const previousVersionSelect = document.getElementById('previousVersionSelect');
+            const selectedCurrentVersion = currentVersionSelect.value;
+            const currentIndex = sortedVersionsCache.indexOf(selectedCurrentVersion);
+
+            previousVersionSelect.disabled = sortedVersionsCache.length <= 1 || currentIndex === 0;
+
+            if (currentIndex > 0) {
+                previousVersionSelect.value = sortedVersionsCache[currentIndex - 1];
+            } else if (sortedVersionsCache.length > 0 && sortedVersionsCache.length <=1 ) {
+                 previousVersionSelect.value = sortedVersionsCache[0];
+            } else if (sortedVersionsCache.length > 1) {
+                 previousVersionSelect.value = sortedVersionsCache[0];
+            }
+        }
+
+        function updateHeatmap(region, allData, performComparison, selectedCurrentVersion, selectedPreviousVersion, selectedResolutionType) {
+            hideMessage();
+            hideMessage('summaryPanel');
+            Plotly.purge('heatmapDiv');
+
+            const YEAR_MIN = 1990;
+            const YEAR_MAX = 2024;
+
+            if (!allData || !Array.isArray(allData) || allData.length === 0) {
+                showMessage('No data available to display heatmap. Check data source.', 'error', 'messageBox');
+                return;
+            }
+
+            const versionForHeatmap = selectedCurrentVersion;
+            if (!versionForHeatmap) {
+                showMessage('Please select a version to display.', 'error', 'messageBox');
+                return;
+            }
+
+            let currentVersionData = allData.filter(d =>
+                String(d.version) === String(versionForHeatmap) &&
+                d.region === region &&
+                d.Year >= YEAR_MIN && d.Year <= YEAR_MAX
+            );
+
+            if (currentVersionData.length === 0) {
+                const emptyMsg = `No data found for Region: '${region}', Version: ${versionForHeatmap} (Years: ${YEAR_MIN}-${YEAR_MAX}).`;
+                showMessage(emptyMsg, 'info', 'messageBox');
+                let summaryText = `<h4 class="text-xl font-semibold mb-3 pb-2 border-b border-slate-300">Summary</h4><ul><li>Displaying: ${versionForHeatmap}</li><li>Region: ${region}</li><li>Years: ${YEAR_MIN}-${YEAR_MAX}</li><li>Total Countries: 0</li><li>Total Tiles: 0</li></ul>`;
+                showMessage(summaryText, performComparison ? 'comparison_summary' : 'global_summary', 'summaryPanel');
+                return;
+            }
+
+            const uniqueYears = [...new Set(currentVersionData.map(d => d.Year))].sort((a, b) => a - b);
+            const uniqueCountries = [...new Set(currentVersionData.map(d => d.adm_0_name))].sort();
+
+            if (uniqueCountries.length === 0 || uniqueYears.length === 0) {
+                showMessage(`Not enough distinct data (countries or years) for ${region}, Version: ${versionForHeatmap}.`, 'info', 'messageBox');
+                return;
+            }
+
+            const zValuesMatrix = uniqueCountries.map(() => uniqueYears.map(() => (selectedResolutionType === "Temporal" ? TEMPORAL_LEVELS["NA"] : SPATIAL_LEVELS["NA"])));
+            const hoverTextMatrix = uniqueCountries.map(() => uniqueYears.map(() => ''));
+
+            let counts = {};
+            const levelTexts = selectedResolutionType === "Temporal" ? TEMPORAL_TEXT : SPATIAL_TEXT;
+            Object.values(levelTexts).forEach(text => counts[text] = 0);
+            let totalDisplayedTiles = 0;
+
+            currentVersionData.forEach(d => {
+                const yearIndex = uniqueYears.indexOf(d.Year);
+                const countryIndex = uniqueCountries.indexOf(d.adm_0_name);
+                if (yearIndex !== -1 && countryIndex !== -1) {
+                    totalDisplayedTiles++;
+                    let resValue;
+                    const currentTResText = d.T_res_nm || "NA";
+                    const currentSResText = d.S_res_nm || "NA";
+
+                    if (selectedResolutionType === "Temporal") {
+                        resValue = TEMPORAL_LEVELS[currentTResText] !== undefined ? TEMPORAL_LEVELS[currentTResText] : TEMPORAL_LEVELS["NA"];
+                        counts[currentTResText]++;
+                    } else {
+                        resValue = SPATIAL_LEVELS[currentSResText] !== undefined ? SPATIAL_LEVELS[currentSResText] : SPATIAL_LEVELS["NA"];
+                        counts[currentSResText]++;
+                    }
+                    zValuesMatrix[countryIndex][yearIndex] = resValue;
+                    hoverTextMatrix[countryIndex][yearIndex] = `<b>Country:</b> ${uniqueCountries[countryIndex]}<br><b>Year:</b> ${uniqueYears[yearIndex]}<br><b>T.Res:</b> ${currentTResText}<br><b>S.Res:</b> ${currentSResText}`;
+                }
+            });
+
+            const plotData = [{
+                x: uniqueYears, y: uniqueCountries, z: zValuesMatrix, type: 'heatmap',
+                text: hoverTextMatrix,
+                hovertemplate: '%{text}<extra></extra>',
+                zmin: 0,
+                zmax: selectedResolutionType === "Temporal" ? Object.keys(TEMPORAL_LEVELS).length - 1 : Object.keys(SPATIAL_LEVELS).length - 1,
+                colorscale: selectedResolutionType === "Temporal" ? TEMPORAL_COLORSCALE : SPATIAL_COLORSCALE,
+                showscale: true,
+                colorbar: {
+                    tickvals: Object.values(selectedResolutionType === "Temporal" ? TEMPORAL_LEVELS : SPATIAL_LEVELS),
+                    ticktext: Object.keys(selectedResolutionType === "Temporal" ? TEMPORAL_LEVELS : SPATIAL_LEVELS),
+                    len: 0.7, y: 0.5, yanchor: 'middle', thickness: 15,
+                    tickfont: { family: 'Inter, sans-serif', size: 10, color: '#334155'},
+                    title: { text: selectedResolutionType === "Temporal" ? 'Temporal Res.' : 'Spatial Res.', font: { family: 'Inter, sans-serif', size: 12, color: '#334155'}, side: 'right'}
+                },
+                xgap: 1, ygap: 1
+            }];
+
+            const summaryPanelDiv = document.getElementById('summaryPanel');
+            summaryPanelDiv.style.display = 'block';
+
+            if (performComparison && selectedCurrentVersion && selectedPreviousVersion && selectedCurrentVersion !== selectedPreviousVersion) {
+                let comparisonSummaryText = `<h4 class="text-xl font-semibold text-slate-800 mb-4 pb-2 border-b border-slate-300">Comparison Summary</h4><ul class="space-y-1 text-sm text-slate-700">`;
+                comparisonSummaryText += `<li><strong>Displaying:</strong> ${selectedCurrentVersion}</li>`;
+                comparisonSummaryText += `<li><strong>Comparing with:</strong> ${selectedPreviousVersion}</li>`;
+
+                const prevVersionDataFull = allData.filter(d => String(d.version) === String(selectedPreviousVersion) && d.Year >= YEAR_MIN && d.Year <= YEAR_MAX);
+                const prevCountriesAll = new Set(prevVersionDataFull.map(d => d.adm_0_name));
+                const newCountriesList = uniqueCountries.filter(c => !prevCountriesAll.has(c));
+
+                const prevVersionDataRegion = prevVersionDataFull.filter(d => d.region === region);
+                const prevDataMap = new Map();
+                prevVersionDataRegion.forEach(d_prev => {
+                    prevDataMap.set(`${d_prev.adm_0_name}_${d_prev.Year}`, {
+                        t_level: TEMPORAL_LEVELS[d_prev.T_res_nm || "NA"],
+                        s_level: SPATIAL_LEVELS[d_prev.S_res_nm || "NA"],
+                    });
+                });
+
+                let newMeaningfulForSelectedTypeCount = 0;
+                let improvedForSelectedTypeCount = 0;
+
+                // Revert to zNewHighlight and zImprovedHighlight matrices for heatmap overlays
+                const zNewHighlight = uniqueCountries.map(() => uniqueYears.map(() => null));
+                const zImprovedHighlight = uniqueCountries.map(() => uniqueYears.map(() => null));
+
+                currentVersionData.forEach(d_curr => {
+                    const tileKey = `${d_curr.adm_0_name}_${d_curr.Year}`;
+                    const prevEntry = prevDataMap.get(tileKey);
+
+                    const curr_t_level = TEMPORAL_LEVELS[d_curr.T_res_nm || "NA"];
+                    const curr_s_level = SPATIAL_LEVELS[d_curr.S_res_nm || "NA"];
+
+                    const countryIndex = uniqueCountries.indexOf(d_curr.adm_0_name);
+                    const yearIndex = uniqueYears.indexOf(d_curr.Year);
+
+                    let classifiedAsNewMeaningfulPrimary = false;
+                    let classifiedAsImprovedPrimary = false;
+
+                    const currentPrimaryLevel = (selectedResolutionType === "Temporal") ? curr_t_level : curr_s_level;
+                    const NA_LEVEL_FOR_PRIMARY = (selectedResolutionType === "Temporal") ? TEMPORAL_LEVELS["NA"] : SPATIAL_LEVELS["NA"];
+                    const currentPrimaryIsNA = currentPrimaryLevel === NA_LEVEL_FOR_PRIMARY;
+
+                    const previousPrimaryLevel = prevEntry ?
+                                            ((selectedResolutionType === "Temporal") ? prevEntry.t_level : prevEntry.s_level)
+                                            : undefined;
+
+                    if (!currentPrimaryIsNA && (!prevEntry || previousPrimaryLevel === NA_LEVEL_FOR_PRIMARY)) {
+                        newMeaningfulForSelectedTypeCount++;
+                        classifiedAsNewMeaningfulPrimary = true;
+                    } else if (prevEntry && !currentPrimaryIsNA &&
+                            previousPrimaryLevel !== NA_LEVEL_FOR_PRIMARY &&
+                            currentPrimaryLevel < previousPrimaryLevel) {
+                        improvedForSelectedTypeCount++;
+                        classifiedAsImprovedPrimary = true;
+                    }
+
+                    if (countryIndex !== -1 && yearIndex !== -1) {
+                        let hoverPrefix = "";
+                        if (classifiedAsNewMeaningfulPrimary) {
+                            // Set value for the heatmap overlay cell
+                            zNewHighlight[countryIndex][yearIndex] = 4; // Arbitrary value for this layer
+                            hoverPrefix = `<span style="color:#DC2626; font-weight:bold;">New Meaningful ${selectedResolutionType === "Temporal" ? "T.Res" : "S.Res"}</span><br>`;
+                        } else if (classifiedAsImprovedPrimary) {
+                            // Set value for the heatmap overlay cell
+                            zImprovedHighlight[countryIndex][yearIndex] = 5; // Arbitrary value for this layer
+                            hoverPrefix = `<span style="color:#2563EB; font-weight:bold;">Improved ${selectedResolutionType === "Temporal" ? "T.Res" : "S.Res"}</span><br>`;
+                        }
+                        if (hoverPrefix) {
+                            hoverTextMatrix[countryIndex][yearIndex] = hoverPrefix + hoverTextMatrix[countryIndex][yearIndex];
+                        }
+                    }
+                });
+                plotData[0].text = hoverTextMatrix; // Update the main plot's hover text
+
+                comparisonSummaryText += `<li>New countries in region: <span class="summary-new-country">${newCountriesList.length}</span> ${newCountriesList.length > 0 ? `(${newCountriesList.join(', ')})` : ''}</li>`;
+                comparisonSummaryText += `<li>New meaningful tiles (for ${selectedResolutionType}): <span class="summary-new-tile">${newMeaningfulForSelectedTypeCount}</span></li>`;
+                comparisonSummaryText += `<li>Improved tiles (for ${selectedResolutionType}): <span class="summary-improved-res">${improvedForSelectedTypeCount}</span></li>`;
+                comparisonSummaryText += `</ul>`;
+
+                // Add overlay heatmap traces for highlights with new, more distinct colors
+                if (newMeaningfulForSelectedTypeCount > 0) {
+                    plotData.push({
+                        x: uniqueYears, y: uniqueCountries, z: zNewHighlight, type: 'heatmap',
+                        // UPDATED COLOR for "New Meaningful": More opaque red
+                        colorscale: [[0, 'rgba(220, 38, 38, 0.55)'], [1, 'rgba(220, 38, 38, 0.55)']],
+                        zmin: 4, zmax: 4, // Match the arbitrary value set above
+                        showscale: false, hoverinfo: 'skip'
+                    });
+                }
+                if (improvedForSelectedTypeCount > 0) {
+                    plotData.push({
+                        x: uniqueYears, y: uniqueCountries, z: zImprovedHighlight, type: 'heatmap',
+                        // UPDATED COLOR for "Improved": More opaque blue
+                        colorscale: [[0, 'rgba(37, 99, 235, 0.55)'], [1, 'rgba(37, 99, 235, 0.55)']],
+                        zmin: 5, zmax: 5, // Match the arbitrary value set above
+                        showscale: false, hoverinfo: 'skip'
+                    });
+                }
+                showMessage(comparisonSummaryText, 'comparison_summary', 'summaryPanel');
+
+
+            } else if (performComparison) {
+                let errorSummaryText = `<h4 class="text-xl font-semibold text-slate-800 mb-4 pb-2 border-b border-slate-300">Comparison Information</h4><ul class="space-y-1 text-sm text-slate-700">`;
+                 errorSummaryText += `<li>Displaying: ${selectedCurrentVersion || 'N/A'}</li>`;
+                if (!selectedCurrentVersion || !selectedPreviousVersion) {
+                    errorSummaryText += `<li><span class="font-medium text-amber-600">Warning:</span> Please select both a current and a previous version for comparison.</li>`;
+                } else if (selectedCurrentVersion === selectedPreviousVersion) {
+                    errorSummaryText += `<li><span class="font-medium text-amber-600">Warning:</span> Cannot compare a version to itself. Please select different versions.</li>`;
+                } else {
+                     errorSummaryText += `<li><span class="font-medium text-slate-600">Note:</span> Comparison conditions not fully met or no comparable data.</li>`;
+                }
+                errorSummaryText += `</ul>`;
+                showMessage(errorSummaryText, 'comparison_summary', 'summaryPanel');
+            } else {
+                let globalSummaryText = `<h4 class="text-xl font-semibold text-slate-800 mb-4 pb-2 border-b border-slate-300">Global Summary</h4><ul class="space-y-1 text-sm text-slate-700">`;
+                globalSummaryText += `<li><strong>Displaying Version:</strong> ${versionForHeatmap}</li>`;
+                globalSummaryText += `<li><strong>Region:</strong> ${region}</li>`;
+                globalSummaryText += `<li><strong>Years:</strong> ${uniqueYears.length > 0 ? uniqueYears[0] + ' - ' + uniqueYears[uniqueYears.length -1] : 'N/A'} </li>`;
+                globalSummaryText += `<li><strong>Total Countries in Selection:</strong> ${uniqueCountries.length}</li>`;
+                globalSummaryText += `<li><strong>Total Tiles Displayed:</strong> ${totalDisplayedTiles}</li>`;
+                Object.keys(levelTexts).forEach(levelKey => {
+                    const text = levelTexts[levelKey];
+                    const percentage = totalDisplayedTiles > 0 ? ((counts[text] / totalDisplayedTiles) * 100).toFixed(1) : 0;
+                    globalSummaryText += `<li>${text} Tiles: ${counts[text]} (${percentage}%)</li>`;
+                });
+                globalSummaryText += `</ul>`;
+                showMessage(globalSummaryText, 'global_summary', 'summaryPanel');
+            }
+
+            let titleSuffix = selectedResolutionType === "Temporal" ? "Temporal Resolution" : "Spatial Resolution";
+            const layout = {
+                title: { text: `Best ${titleSuffix} Available - ${region} (${versionForHeatmap})`, x: 0.5, xanchor: 'center', font: { family: 'Inter, sans-serif', size: 18, color: '#1e293b'}},
+                autosize: true, height: 780,
+                xaxis: { title: {text: 'Year', font: {family: 'Inter, sans-serif', size: 13, color: '#334155'}}, dtick: uniqueYears.length > 20 ? Math.ceil(uniqueYears.length / 15) : 1, tickangle: uniqueYears.length > 25 ? 45 : 0, tickfont: { family: 'Inter, sans-serif', size: 11, color: '#475569'}, gridcolor: '#e2e8f0', automargin: true },
+                yaxis: { title: {text: 'Country', font: {family: 'Inter, sans-serif', size: 13, color: '#334155'}}, automargin: true, tickfont: { family: 'Inter, sans-serif', size: uniqueCountries.length > 30 ? 9 : 11, color: '#475569'}, gridcolor: '#e2e8f0'},
+                margin: { t: 60, b: 80, r: 20, l: uniqueCountries.length > 10 ? 150 : 100 },
+                plot_bgcolor: '#ffffff', paper_bgcolor: '#ffffff', showlegend: false,
+                font: { family: 'Inter, sans-serif', size: 12, color: '#334155' }
+            };
+
+            Plotly.react('heatmapDiv', plotData, layout, {responsive: true});
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const regionSelect = document.getElementById('regionSelect');
+            const resolutionTypeSelect = document.getElementById('resolutionTypeSelect');
+            const comparisonCheckbox = document.getElementById('enableComparison');
+            const currentVersionSelect = document.getElementById('currentVersionSelect');
+            const previousVersionSelect = document.getElementById('previousVersionSelect');
+            const previousVersionControlSpan = document.getElementById('previousVersionControlSpan');
+            let allDataCache = null;
+
+            function togglePreviousVersionControl(show) {
+                 if (show) {
+                    previousVersionControlSpan.style.display = 'flex';
+                    previousVersionControlSpan.classList.add('flex-col', 'sm:flex-row', 'sm:items-center', 'sm:space-x-2');
+                } else {
+                    previousVersionControlSpan.style.display = 'none';
+                }
+            }
+
+            function triggerUpdate() {
+                if (allDataCache) {
+                    const selectedRegion = regionSelect.value;
+                    const selectedResType = resolutionTypeSelect.value;
+                    const performComparison = comparisonCheckbox.checked;
+                    const selectedCurrent = currentVersionSelect.value;
+                    const selectedPrevious = previousVersionSelect.value;
+                    updateHeatmap(selectedRegion, allDataCache, performComparison, selectedCurrent, selectedPrevious, selectedResType);
+                } else {
+                     showMessage("Data is not loaded yet. Please wait or try refreshing.", "error");
+                }
+            }
+
+            function initializePlot() {
+                showMessage("Loading data, please wait...", "info");
+                loadData().then(data => {
+                    hideMessage();
+                    allDataCache = data;
+                    if (!allDataCache || allDataCache.length === 0) {
+                        showMessage("Failed to load data or data is empty. Check 'heatmap.csv' and console.", "error");
+                        document.getElementById('currentVersionSelect').disabled = true;
+                        document.getElementById('previousVersionSelect').disabled = true;
+                        return;
+                    }
+                    populateVersionDropdowns(allDataCache, 'currentVersionSelect', 'previousVersionSelect');
+                    togglePreviousVersionControl(comparisonCheckbox.checked);
+                    triggerUpdate();
+                }).catch(error => {
+                    console.error('Initialization failed during data load:', error);
+                });
+            }
+
+            regionSelect.addEventListener('change', triggerUpdate);
+            resolutionTypeSelect.addEventListener('change', triggerUpdate);
+            comparisonCheckbox.addEventListener('change', () => {
+                togglePreviousVersionControl(comparisonCheckbox.checked);
+                triggerUpdate();
+            });
+            currentVersionSelect.addEventListener('change', () => {
+                if (allDataCache && allDataCache.length > 0) {
+                     updatePreviousVersionSelection();
+                }
+                triggerUpdate();
+            });
+            previousVersionSelect.addEventListener('change', triggerUpdate);
+
+            initializePlot();
+
+            window.addEventListener('resize', () => {
+                if (allDataCache && document.getElementById('heatmapDiv').offsetParent !== null) {
+                    Plotly.Plots.resize(document.getElementById('heatmapDiv'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
