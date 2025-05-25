@@ -1,7 +1,8 @@
 ---
 title: "The OpenDengue project"
+format: html 
 ---
-![](./figure/OpenDengue_logo.jpg)
+![](archived_docs/figure/OpenDengue_logo.jpg)
 OpenDengue is a project run by researchers at the London School of Hygiene and Tropical Medicine that aims to address a key gap health data analytics for dengue.
 
 ## Our goal
@@ -32,22 +33,4 @@ Key individuals include:
 The OpenDengue project is supported by a research grant from the UK Medical Research Council UK Medical Research Council (Grant number: [MR/V031112/1](https://gtr.ukri.org/projects?ref=MR%2FV031112%2F1)).
 
 
-```{r echo=FALSE}
-library(metathis)
 
-meta() %>%
-  meta_description(
-    "The OpenDengue project aims to build and maintain a database of dengue case counts for every dengue-affected country worldwide since 1990 or earlier. We collate data from a range of publicly available sources including ministry of health websites, peer-reviewed publications and other disease databases."
-  ) %>% 
-  
-  meta_social(
-    title = "OpenDengue: Data",
-    url = "opendengue.org",
-    image = "https://raw.githubusercontent.com/OpenDengue/master-repo/main/docs/logo/thumbnail.png",
-    twitter_card_type = "summary_large_image",
-    twitter_creator = "@OliverBrady1",
-    image_alt = "OpenDengue Logo",
-    og_type = "website"
-
-  )
-```

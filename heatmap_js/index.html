@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Heatmap with Region Selection</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for better visual appeal */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #374151; /* Dark gray text */
+            padding-top: 20px;
+            padding-bottom: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff; /* White background for the main content */
+            padding: 10px !important; /* Snug padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Takes full width up to max-width */
+            max-width: 1000px !important; /* Overall width of the white panel */
+            margin: 20px auto !important; /* Top/bottom margin, auto left/right for centering container */
+            box-sizing: border-box;
+            /* Flexbox to center children like heatmapDiv */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .controls-container {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%; /* Ensure controls container can also be centered if needed by body flex */
+        }
+        label {
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background-color: #f9fafb;
+        }
+        #heatmapDiv {
+            border-radius: 8px;
+            overflow: hidden;
+            /* width and height are applied inline below and are fixed values */
+        }
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            color: #ffffff;
+            text-align: center;
+        }
+        .error-message {
+            background-color: #ef4444;
+        }
+        .info-message {
+            background-color: #3b82f6;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="controls-container">
+            <label for="regionSelect" class="text-lg">Select Region:</label>
+            <select id="regionSelect" class="p-2 border rounded-md shadow-sm">
+                <option value="PAHO">PAHO</option>
+                <option value="WPRO">WPRO</option>
+                <option value="SEARO">SEARO</option>
+                <option value="EURO">EURO</option>
+                <option value="AFRO">AFRO</option>
+            </select>
+        </div>
+
+        <div id="heatmapDiv" style="height: 700px; width: 800px;"></div>
+
+        <div id="messageBox" class="message-box" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Function to display messages
+        function showMessage(message, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type === 'error' ? 'error-message' : 'info-message'}`;
+            messageBox.style.display = 'block';
+        }
+
+        // Function to hide messages
+        function hideMessage() {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.style.display = 'none';
+        }
+
+        // Step 1: Load CSV data using PapaParse
+        function loadCSVData() {
+            return new Promise((resolve, reject) => {
+                Papa.parse("heatmap.csv", {
+                    download: true,
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    complete: function(result) {
+                        if (result.data && result.data.length > 0) {
+                            console.log("CSV Data Loaded Successfully:", result.data);
+                            resolve(result.data);
+                        } else if (result.errors && result.errors.length > 0) {
+                            console.error('Errors during CSV parsing:', result.errors);
+                            showMessage(`Error parsing CSV: ${result.errors[0].message}`, 'error');
+                            reject(new Error('Error parsing CSV. Check console for details.'));
+                        }
+                        else {
+                            console.error('CSV parsing successful, but no data found or data is empty.');
+                            showMessage('CSV file is empty or contains no data.', 'error');
+                            reject(new Error('No data found in CSV or CSV is empty.'));
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error loading or fetching CSV:', error);
+                        showMessage(`Error loading heatmap.csv: ${error.message}. Ensure the file is in the same directory and you are using a local server.`, 'error');
+                        reject(error);
+                    }
+                });
+            });
+        }
+
+        // Step 2: Prepare the data and filter by region
+        function updateHeatmap(region, data) {
+            hideMessage();
+            try {
+                const filteredData = data.filter(d => d && d.region === region && d.Year !== null && d.Year !== undefined && d.Year > 1990);
+                console.log(`Filtered Data for ${region}:`, filteredData);
+
+                if (filteredData.length === 0) {
+                    showMessage(`No data available for ${region} after 1990. Check CSV data and filters.`, 'info');
+                    Plotly.purge('heatmapDiv');
+                    return;
+                }
+
+                const uniqueYears = [...new Set(filteredData.map(d => d.Year))].sort((a, b) => a - b);
+                const uniqueCountries = [...new Set(filteredData.map(d => d.adm_0_name))].sort();
+
+                if (uniqueCountries.length === 0 || uniqueYears.length === 0) {
+                    showMessage(`Not enough distinct data points (countries or years) for ${region} to create a heatmap.`, 'info');
+                    Plotly.purge('heatmapDiv');
+                    return;
+                }
+
+                const zValuesMatrix = uniqueCountries.map(() => uniqueYears.map(() => 3)); // Default to NA
+
+                filteredData.forEach(d => {
+                    const yearIndex = uniqueYears.indexOf(d.Year);
+                    const countryIndex = uniqueCountries.indexOf(d.adm_0_name);
+
+                    if (yearIndex !== -1 && countryIndex !== -1 && d.T_res_nm !== undefined) {
+                        let zValue;
+                        if (d.T_res_nm === 'Weekly') zValue = 0;
+                        else if (d.T_res_nm === 'Monthly') zValue = 1;
+                        else if (d.T_res_nm === 'Yearly') zValue = 2;
+                        else zValue = 3; // for 'NA' or other unexpected values
+                        zValuesMatrix[countryIndex][yearIndex] = zValue;
+                    } else if (d.T_res_nm === undefined) {
+                        console.warn("Undefined T_res_nm for item:", d);
+                    }
+                });
+
+                // Step 3: Create the heatmap plot using Plotly
+                const plotData = [{
+                    x: uniqueYears,
+                    y: uniqueCountries,
+                    z: zValuesMatrix,
+                    type: 'heatmap',
+                    zmin: 0,
+                    zmax: 3,
+                    colorscale: [
+                        [0.0, '#479A5A'], [0.25, '#479A5A'],
+                        [0.25, '#99D8CA'], [0.5, '#99D8CA'],
+                        [0.5, '#E5F5F9'], [0.75, '#E5F5F9'],
+                        [0.75, '#D9D9D9'], [1.0, '#D9D9D9']
+                    ],
+                    showscale: false,
+                    xgap: 2,
+                    ygap: 2,
+                    text: zValuesMatrix.map(row => row.map(val => {
+                        if (val === 0) return 'Weekly';
+                        if (val === 1) return 'Monthly';
+                        if (val === 2) return 'Yearly';
+                        return 'NA';
+                    })),
+                    hovertemplate: '<b>Country:</b> %{y}<br>' +
+                                   '<b>Year:</b> %{x}<br>' +
+                                   '<b>Resolution:</b> %{text}<extra></extra>'
+                }];
+
+                const layout = {
+                    title: {
+                        text: `Best Temporal Resolution Available - ${region}`,
+                        x: 0.5,
+                        xanchor: 'center'
+                    },
+                    autosize: false, // Explicitly disable autosizing
+                    width: 800,  // Plotly chart width, matches heatmapDiv width
+                    height: 680, // Plotly layout height, fits within heatmapDiv height
+                    xaxis: {
+                        title: 'Year',
+                        dtick: uniqueYears.length > 14 ? Math.ceil(uniqueYears.length / 8) : 1,
+                        tickangle: 0,
+                        tickfont: {
+                            size: 12
+                        }
+                    },
+                    yaxis: {
+                        title: 'Country',
+                        automargin: true,
+                        tickfont: {
+                            size: 12
+                        }
+                    },
+                    margin: { t: 50, b: 70, r: 10, l: 10 },
+                    plot_bgcolor: '#ffffff',
+                    paper_bgcolor: '#ffffff'
+                };
+
+                Plotly.newPlot('heatmapDiv', plotData, layout);
+
+            } catch (error) {
+                console.error('Error updating heatmap:', error);
+                showMessage(`Error generating heatmap: ${error.message}. Check console for details.`, 'error');
+            }
+        }
+
+        // Initial plot logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const regionSelect = document.getElementById('regionSelect');
+            let allDataCache = null;
+
+            function initializePlot() {
+                loadCSVData().then(data => {
+                    allDataCache = data;
+                    const selectedRegion = regionSelect.value;
+                    updateHeatmap(selectedRegion, allDataCache);
+                }).catch(error => {
+                    console.error('Initialization failed:', error);
+                    if (document.getElementById('messageBox').style.display === 'none') {
+                         showMessage('Failed to initialize the heatmap. Please ensure heatmap.csv is present and correctly formatted.', 'error');
+                    }
+                });
+            }
+
+            regionSelect.addEventListener('change', (event) => {
+                if (allDataCache) {
+                    const selectedRegion = event.target.value;
+                    updateHeatmap(selectedRegion, allDataCache);
+                } else {
+                    console.warn("Data cache was empty on region change. Attempting to re-initialize.");
+                    initializePlot();
+                }
+            });
+
+            initializePlot();
+        });
+    </script>
+
+</body>
+</html>
