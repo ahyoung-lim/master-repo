@@ -9,3 +9,5 @@ shiny/
 *.fst
 *.DS_Store
 .Rproj
+
+/.quarto/
