@@ -1,9 +1,8 @@
-// Base URL for your zip files on GitHub Pages (adjust if needed)
+console.log("script.js loaded");
+
 const baseUrl = "https://ahyoung-lim.github.io/master-repo/resources/";
 
-// Data type to zip file name pattern function
 function getZipFileName(dataType, region) {
-  // Example pattern: Temporal_extract_AFRO_V1_3.zip
   return `${dataType}_extract_${region}_V1_3.zip`;
 }
 
@@ -11,15 +10,13 @@ let selectedDataType = null;
 let selectedRegion = null;
 let countries = [];
 let dateRange = [null, null];
-let allData = [];  // all parsed CSV rows as JS objects
+let allData = [];
 let filteredPreview = [];
 
-// Utility: convert filtered data array to CSV string
 function convertToCSV(data) {
   return Papa.unparse(data);
 }
 
-// Utility: download CSV file from string content
 function downloadCSV(csvString, filename) {
   const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement("a");
@@ -33,7 +30,6 @@ function downloadCSV(csvString, filename) {
   URL.revokeObjectURL(url);
 }
 
-// Load and parse ZIP file CSV
 async function loadAndParseZip(dataType, region) {
   if (!dataType || !region) {
     console.warn("Data type or region not selected.");
@@ -50,11 +46,9 @@ async function loadAndParseZip(dataType, region) {
       console.error(`Fetch error: ${response.status} ${response.statusText}`);
       return [];
     }
-
     const arrayBuffer = await response.arrayBuffer();
     const zip = await JSZip.loadAsync(arrayBuffer);
 
-    // Find first CSV file inside ZIP
     const csvFileName = Object.keys(zip.files).find(name => name.endsWith(".csv"));
     if (!csvFileName) {
       alert("No CSV file found in ZIP.");
@@ -64,7 +58,6 @@ async function loadAndParseZip(dataType, region) {
     const csvText = await zip.file(csvFileName).async("text");
     console.log(`Parsed CSV from ZIP: ${csvFileName}`);
 
-    // Parse CSV to JSON array
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
     if (parsed.errors.length) {
       console.warn("CSV parse errors:", parsed.errors);
@@ -79,7 +72,6 @@ async function loadAndParseZip(dataType, region) {
   }
 }
 
-// Filter data by selected countries and date range
 function filterData(data, countries, startDate, endDate) {
   if (!countries.length || !startDate || !endDate) return [];
 
@@ -95,12 +87,10 @@ function filterData(data, countries, startDate, endDate) {
     const rowStart = new Date(row.calendar_start_date);
     const rowEnd = new Date(row.calendar_end_date);
 
-    // Check if row date range overlaps with selected date range
     return (rowStart <= end) && (rowEnd >= start);
   });
 }
 
-// Render preview table with filtered data
 function renderPreviewTable(data) {
   if ($.fn.dataTable.isDataTable('#previewTable')) {
     $('#previewTable').DataTable().clear().destroy();
@@ -122,7 +112,6 @@ function renderPreviewTable(data) {
   });
 }
 
-// Populate country select options based on loaded data
 function updateCountryOptions(data) {
   const countrySelect = document.getElementById("countrySelect");
   const uniqueCountries = [...new Set(data.map(row => row.adm_0_name))].sort();
@@ -135,30 +124,26 @@ function updateCountryOptions(data) {
     countrySelect.appendChild(option);
   });
 
-  // Clear selection
-  countrySelect.value = null;
+  countrySelect.selectedIndex = -1; // clear selection properly
   $(countrySelect).trigger("change");
 }
 
-// Compute min and max date range from data for selected countries
 function computeDateRange(data, countries) {
   const filtered = data.filter(row => countries.includes(row.adm_0_name));
-
   if (!filtered.length) return [null, null];
 
   const startDates = filtered.map(r => new Date(r.calendar_start_date));
   const endDates = filtered.map(r => new Date(r.calendar_end_date));
 
-  const maxStart = new Date(Math.max(...startDates));
-  const minEnd = new Date(Math.min(...endDates));
+  const minStart = new Date(Math.min(...startDates));
+  const maxEnd = new Date(Math.max(...endDates));
 
-  if (maxStart > minEnd) return [null, null];
-
-  return [maxStart.toISOString().slice(0,10), minEnd.toISOString().slice(0,10)];
+  return [minStart.toISOString().slice(0,10), maxEnd.toISOString().slice(0,10)];
 }
 
-// DOMContentLoaded handler
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded and parsed");
+
   const dataTypeSelect = document.getElementById("dataTypeSelect");
   const regionSelect = document.getElementById("regionSelect");
   const countrySelect = document.getElementById("countrySelect");
@@ -167,11 +152,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterBtn = document.getElementById("filterBtn");
   const downloadBtn = document.getElementById("downloadBtn");
 
-  // When data type or region changes: load ZIP, parse, update countries
   async function loadDataAndUpdate() {
     selectedDataType = dataTypeSelect.value;
     selectedRegion = regionSelect.value;
-    allData = []; // reset
+    allData = [];
     filteredPreview = [];
     renderPreviewTable([]);
     downloadBtn.href = "#";
@@ -193,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateCountryOptions(allData);
 
-    // Reset date pickers
     startDateInput.value = "";
     endDateInput.value = "";
     startDateInput.min = "";
@@ -208,10 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
   dataTypeSelect.addEventListener("change", loadDataAndUpdate);
   regionSelect.addEventListener("change", loadDataAndUpdate);
 
-  // When countries selection changes: update date pickers
   $(countrySelect).on("change", () => {
     countries = Array.from(countrySelect.selectedOptions).map(o => o.value);
-
     if (countries.length && allData.length) {
       const [minDate, maxDate] = computeDateRange(allData, countries);
       if (minDate && maxDate) {
@@ -246,15 +227,14 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPreviewTable([]);
   });
 
-  // Update dateRange variables on date change
   startDateInput.addEventListener("change", () => {
     dateRange[0] = startDateInput.value;
   });
+
   endDateInput.addEventListener("change", () => {
     dateRange[1] = endDateInput.value;
   });
 
-  // Filter button: filter data and render preview
   filterBtn.addEventListener("click", () => {
     if (!selectedDataType) {
       alert("Please select a data type.");
@@ -277,13 +257,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     filteredPreview = filterData(allData, countries, dateRange[0], dateRange[1]);
+    console.log("Filtered rows:", filteredPreview.length);
     if (!filteredPreview.length) {
       alert("No data matches your filter.");
     }
     renderPreviewTable(filteredPreview);
   });
 
-  // Download button: download filtered CSV
   downloadBtn.addEventListener("click", () => {
     if (!filteredPreview.length) {
       alert("No filtered data to download. Please preview first.");
