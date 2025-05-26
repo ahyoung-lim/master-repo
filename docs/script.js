@@ -1,4 +1,4 @@
-const baseUrl = "https://ahyoung-lim.github.io/master-repo/src/assets/";
+const baseUrl = "https://ahyoung-lim.github.io/master-repo/assets/";
 
 let metadata = [];
 let allData = [];
