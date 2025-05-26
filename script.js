@@ -145,9 +145,8 @@ function renderPreviewTable(data) {
     data,
     columns: [
       { title: "Country", data: "adm_0_name" },
-      { title: "Admin1", data: "adm_1_name" },
-      { title: "Admin2", data: "adm_2_name" },
-
+      { title: "Admin 1", data: "adm_1_name" },
+      { title: "Admin 2", data: "adm_2_name" },
       { title: "Date Start", data: "calendar_start_date" },
       { title: "Date End", data: "calendar_end_date" },
       { title: "Temporal Res", data: "T_res" },
@@ -176,6 +175,14 @@ function computeDateRangeFromMetadata(region, countries) {
   return [minStart.toISOString().slice(0, 10), maxEnd.toISOString().slice(0, 10)];
 }
 
+function showLoading() {
+  document.getElementById("loadingIndicator").style.display = "block";
+}
+
+function hideLoading() {
+  document.getElementById("loadingIndicator").style.display = "none";
+}
+
 function aggregateData(data, dateKey) {
   const aggregation = {};
   data.forEach(row => {
@@ -198,7 +205,7 @@ function preparePlotData(data, resolution) {
 function renderBarPlot(divId, title, plotData) {
   const container = document.getElementById(divId);
   if (!plotData.dates.length) {
-    container.innerHTML = '<p style="text-align:center; colour:#888;">No data available</p>';
+    container.innerHTML = '<p style="text-align:center; color:#888;">No data available</p>';
     return;
   }
 
@@ -246,7 +253,7 @@ function renderBarPlot(divId, title, plotData) {
     type: 'bar',
     marker: {
       color: colours[divId] || '#264653',
-      line: { width: 1.5, color: '#264653' }
+      line: { width: 1.0, color: '#264653' }
     },
     hovertext: hoverText,
     hoverinfo: 'x+y+text',
@@ -288,6 +295,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const endDateInput = document.getElementById("endDate");
   const filterBtn = document.getElementById("filterBtn");
   const downloadBtn = document.getElementById("downloadBtn");
+  const loadingIndicator = document.getElementById("loadingIndicator");
 
   regionSelect.addEventListener("change", () => {
     selectedRegion = regionSelect.value;
@@ -296,8 +304,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     allData = filteredPreview = [];
     renderPreviewTable([]);
     updatePlots([]);
-    downloadBtn.href = "#";
-    downloadBtn.textContent = "Download Filtered CSV";
   });
 
   dataTypeSelect.addEventListener("change", () => {
@@ -305,8 +311,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     allData = filteredPreview = [];
     renderPreviewTable([]);
     updatePlots([]);
-    downloadBtn.href = "#";
-    downloadBtn.textContent = "Download Filtered CSV";
   });
 
   $('#countrySelect').on('change', () => {
@@ -332,30 +336,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  filterBtn.addEventListener("click", async () => {
-    const selectedCountries = Array.from(countrySelect.selectedOptions).map(opt => opt.value);
-    const startDate = startDateInput.value;
-    const endDate = endDateInput.value;
+  filterBtn.addEventListener("click", () => {
+  const selectedCountries = Array.from(countrySelect.selectedOptions).map(opt => opt.value);
+  const startDate = startDateInput.value;
+  const endDate = endDateInput.value;
 
-    if (!selectedDataType || !selectedRegion) {
-      alert("Please select Data Type and Region.");
-      return;
-    }
-    if (!selectedCountries.length) {
-      alert("Please select at least one country.");
-      return;
-    }
-    if (!startDate || !endDate) {
-      alert("Please select a valid start and end date.");
-      return;
-    }
-    if (startDate > endDate) {
-      alert("Start Date cannot be after End Date.");
-      return;
-    }
+  if (!selectedDataType || !selectedRegion) {
+    alert("Please select Data Type and Region.");
+    return;
+  }
+  if (!selectedCountries.length) {
+    alert("Please select at least one country.");
+    return;
+  }
+  if (!startDate || !endDate) {
+    alert("Please select a valid start and end date.");
+    return;
+  }
+  if (startDate > endDate) {
+    alert("Start Date cannot be after End Date.");
+    return;
+  }
 
+  filterBtn.disabled = true;
+  if (loadingIndicator) loadingIndicator.style.display = 'block';
+
+  // Allow DOM to update and show spinner before async work
+  requestAnimationFrame(async () => {
     allData = await loadAndParseZip(selectedDataType, selectedRegion);
-    if (!allData.length) return;
+    if (!allData.length) {
+      filterBtn.disabled = false;
+      if (loadingIndicator) loadingIndicator.style.display = 'none';
+      return;
+    }
 
     filteredPreview = filterData(allData, selectedCountries, startDate, endDate);
     if (!filteredPreview.length) {
@@ -370,9 +383,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("No data to download.");
         return false;
       }
-      const filename = `OpenDengue_${selectedDataType}_${selectedRegion}_${Date.now()}.csv`;
+      const filename = `filtered_data_${selectedRegion}_${Date.now()}.csv`;
       downloadCSV(convertToCSV(filteredPreview), filename);
       return false;
     };
+
+    filterBtn.disabled = false;
+    if (loadingIndicator) loadingIndicator.style.display = 'none';
   });
+});
 });
