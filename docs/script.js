@@ -145,6 +145,9 @@ function renderPreviewTable(data) {
     data,
     columns: [
       { title: "Country", data: "adm_0_name" },
+      { title: "Admin1", data: "adm_1_name" },
+      { title: "Admin2", data: "adm_2_name" },
+
       { title: "Date Start", data: "calendar_start_date" },
       { title: "Date End", data: "calendar_end_date" },
       { title: "Temporal Res", data: "T_res" },
@@ -255,7 +258,7 @@ function renderBarPlot(divId, title, plotData) {
     title: { text: title, font: { size: 18 } },
     margin: { t: 30, r: 20, b: 50, l: 50 },
     xaxis: {
-      title: 'Year',
+      title: '',
       tickvals: tickVals,
       ticktext: tickText,
       tickangle: -45,
@@ -367,7 +370,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("No data to download.");
         return false;
       }
-      const filename = `filtered_data_${selectedRegion}_${Date.now()}.csv`;
+      const filename = `OpenDengue_${selectedDataType}_${selectedRegion}_${Date.now()}.csv`;
       downloadCSV(convertToCSV(filteredPreview), filename);
       return false;
     };
