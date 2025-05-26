@@ -1,2773 +1,2764 @@
 [
   {
     "adm_0_name": "AFGHANISTAN",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2021-09-05",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "AMERICAN SAMOA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1955-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "ANGOLA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ANGUILLA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ANTIGUA AND BARBUDA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARGENTINA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARUBA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "AUSTRALIA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-04-30"
   },
   {
     "adm_0_name": "BAHAMAS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "BANGLADESH",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BARBADOS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BELIZE",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BENIN",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BERMUDA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "BHUTAN",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "BOLIVIA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BONAIRE, SAINT EUSTATIUS AND SABA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRAZIL",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRUNEI DARUSSALAM",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1995-01-01",
     "end_date": "2017-12-31"
   },
   {
     "adm_0_name": "BURKINA FASO",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CABO VERDE",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-11-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CAMBODIA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CAMEROON",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CANADA",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "CAYMAN ISLANDS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CENTRAL AFRICAN REPUBLIC",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "CHAD",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CHILE",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "CHINA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "COLOMBIA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COOK ISLANDS",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "COSTA RICA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COTE D'IVOIRE",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CUBA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CURACAO",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "DOMINICA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1962-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "DOMINICAN REPUBLIC",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ECUADOR",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "EL SALVADOR",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ERITREA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ETHIOPIA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FIJI",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1971-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "FRANCE",
+    "region": "EURO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FRENCH GUIANA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1973-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "FRENCH POLYNESIA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "GHANA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "GRENADA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1969-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUADELOUPE",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUAM",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1983-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "GUATEMALA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUINEA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-07-31"
   },
   {
     "adm_0_name": "GUYANA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HAITI",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1972-01-01",
     "end_date": "2022-12-31"
   },
   {
     "adm_0_name": "HONDURAS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HONG KONG",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "INDIA",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "INDONESIA",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1968-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "ITALY",
+    "region": "EURO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "JAMAICA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "JAPAN",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1999-01-01",
     "end_date": "2019-12-31"
   },
   {
     "adm_0_name": "KENYA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "KIRIBATI",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MACAU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2018-12-31"
   },
   {
     "adm_0_name": "MALAYSIA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1963-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MALDIVES",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MALI",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MARSHALL ISLANDS",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1989-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MARTINIQUE",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1975-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MAURITANIA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAURITIUS",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-12-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAYOTTE",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "MEXICO",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1971-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MICRONESIA (FEDERATED STATES OF)",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1993-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MONGOLIA",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2015-12-31"
   },
   {
     "adm_0_name": "MONTSERRAT",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MYANMAR",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1970-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "NAURU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NEPAL",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NEW CALEDONIA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "NEW ZEALAND",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NICARAGUA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "NIGER",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NIUE",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NORTHERN MARIANA ISLANDS",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1992-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "OMAN",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2001-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "PAKISTAN",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "PALAU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "PANAMA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PAPUA NEW GUINEA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1981-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PARAGUAY",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PERU",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PHILIPPINES",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1955-01-01",
     "end_date": "2023-11-25"
   },
   {
     "adm_0_name": "PITCAIRN",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PUERTO RICO",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "REUNION",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "SAINT BARTHELEMY",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT KITTS AND NEVIS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT LUCIA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SAINT MARTIN",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT VINCENT AND THE GRENADINES",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAMOA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SAO TOME AND PRINCIPE",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SAUDI ARABIA",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SENEGAL",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SEYCHELLES",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINGAPORE",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINT MAARTEN",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "2004-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SOLOMON ISLANDS",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SPAIN",
+    "region": "EURO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SRI LANKA",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1965-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SUDAN",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2019-07-28",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SURINAME",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TAIWAN",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "THAILAND",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1958-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TIMOR-LESTE",
+    "region": "SEARO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "TOGO",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2023-09-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TOKELAU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1982-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "TONGA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "TRINIDAD AND TOBAGO",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TURKS AND CAICOS ISLANDS",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1974-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TUVALU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "UNITED REPUBLIC OF TANZANIA",
+    "region": "AFRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "UNITED STATES OF AMERICA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1924-01-20",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "URUGUAY",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VANUATU",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "VENEZUELA",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2023-12-30"
   },
   {
     "adm_0_name": "VIET NAM",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (UK)",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (US)",
-    "dataType": "National",
     "region": "PAHO",
+    "dataType": "National",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "WALLIS AND FUTUNA",
+    "region": "WPRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "YEMEN",
+    "region": "EMRO",
     "dataType": "National",
-    "region": "PAHO",
     "start_date": "2015-01-01",
     "end_date": "2024-07-27"
   },
   {
     "adm_0_name": "AFGHANISTAN",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2021-09-05",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "AMERICAN SAMOA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1955-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "ANGOLA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ANGUILLA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ANTIGUA AND BARBUDA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARGENTINA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARUBA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "AUSTRALIA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-04-30"
   },
   {
     "adm_0_name": "BAHAMAS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BANGLADESH",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BARBADOS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BELIZE",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BENIN",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BERMUDA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BHUTAN",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "BOLIVIA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BONAIRE, SAINT EUSTATIUS AND SABA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRAZIL",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRUNEI DARUSSALAM",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1995-01-01",
     "end_date": "2017-12-31"
   },
   {
     "adm_0_name": "BURKINA FASO",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CABO VERDE",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-11-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CAMBODIA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CAMEROON",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CANADA",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CAYMAN ISLANDS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CENTRAL AFRICAN REPUBLIC",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "CHAD",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CHILE",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CHINA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "COLOMBIA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COOK ISLANDS",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "COSTA RICA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COTE D'IVOIRE",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CUBA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CURACAO",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "DOMINICA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1962-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "DOMINICAN REPUBLIC",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ECUADOR",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "EL SALVADOR",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ERITREA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ETHIOPIA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FIJI",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1971-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "FRANCE",
+    "region": "EURO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FRENCH GUIANA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1973-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "FRENCH POLYNESIA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "GHANA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "GRENADA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1969-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUADELOUPE",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUAM",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1983-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "GUATEMALA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUINEA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-07-31"
   },
   {
     "adm_0_name": "GUYANA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HAITI",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1972-01-01",
     "end_date": "2022-12-31"
   },
   {
     "adm_0_name": "HONDURAS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HONG KONG",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "INDIA",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "INDONESIA",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1968-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "ITALY",
+    "region": "EURO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "JAMAICA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "JAPAN",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1999-01-01",
     "end_date": "2019-12-31"
   },
   {
     "adm_0_name": "KENYA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "KIRIBATI",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MACAU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2018-12-31"
   },
   {
     "adm_0_name": "MALAYSIA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1963-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MALDIVES",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MALI",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MARSHALL ISLANDS",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1989-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MARTINIQUE",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1975-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MAURITANIA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAURITIUS",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-12-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAYOTTE",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "MEXICO",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1971-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MICRONESIA (FEDERATED STATES OF)",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1993-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MONGOLIA",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2015-12-31"
   },
   {
     "adm_0_name": "MONTSERRAT",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MYANMAR",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1970-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "NAURU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NEPAL",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NEW CALEDONIA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "NEW ZEALAND",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NICARAGUA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "NIGER",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NIUE",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NORTHERN MARIANA ISLANDS",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1992-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "OMAN",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2001-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "PAKISTAN",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "PALAU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PANAMA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PAPUA NEW GUINEA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1981-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PARAGUAY",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PERU",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PHILIPPINES",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1955-01-01",
     "end_date": "2023-11-25"
   },
   {
     "adm_0_name": "PITCAIRN",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PUERTO RICO",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "REUNION",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "SAINT BARTHELEMY",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT KITTS AND NEVIS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT LUCIA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT MARTIN",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT VINCENT AND THE GRENADINES",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAMOA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SAO TOME AND PRINCIPE",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SAUDI ARABIA",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SENEGAL",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SEYCHELLES",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINGAPORE",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINT MAARTEN",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "2004-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SOLOMON ISLANDS",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SPAIN",
+    "region": "EURO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SRI LANKA",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1965-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SUDAN",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2019-07-28",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SURINAME",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TAIWAN",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "THAILAND",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1958-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TIMOR-LESTE",
+    "region": "SEARO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "TOGO",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2023-09-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TOKELAU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1982-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "TONGA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "TRINIDAD AND TOBAGO",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TURKS AND CAICOS ISLANDS",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1974-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TUVALU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "UNITED REPUBLIC OF TANZANIA",
+    "region": "AFRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "UNITED STATES OF AMERICA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1924-01-20",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "URUGUAY",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VANUATU",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "VENEZUELA",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "VIET NAM",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (UK)",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (US)",
-    "dataType": "Spatial",
     "region": "PAHO",
+    "dataType": "Spatial",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "WALLIS AND FUTUNA",
+    "region": "WPRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "YEMEN",
+    "region": "EMRO",
     "dataType": "Spatial",
-    "region": "PAHO",
     "start_date": "2015-01-01",
     "end_date": "2024-07-27"
   },
   {
     "adm_0_name": "AFGHANISTAN",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2021-09-05",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "AMERICAN SAMOA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1955-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "ANGOLA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ANGUILLA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ANTIGUA AND BARBUDA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARGENTINA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ARUBA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "AUSTRALIA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-04-30"
   },
   {
     "adm_0_name": "BAHAMAS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BANGLADESH",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BARBADOS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BELIZE",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BENIN",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "BERMUDA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BHUTAN",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "BOLIVIA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BONAIRE, SAINT EUSTATIUS AND SABA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRAZIL",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "BRUNEI DARUSSALAM",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1995-01-01",
     "end_date": "2017-12-31"
   },
   {
     "adm_0_name": "BURKINA FASO",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CABO VERDE",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-11-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CAMBODIA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-21"
   },
   {
     "adm_0_name": "CAMEROON",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CANADA",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CAYMAN ISLANDS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CENTRAL AFRICAN REPUBLIC",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-09-30"
   },
   {
     "adm_0_name": "CHAD",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CHILE",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CHINA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "COLOMBIA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COOK ISLANDS",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "COSTA RICA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "COTE D'IVOIRE",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "CUBA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1977-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "CURACAO",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "DOMINICA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1962-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "DOMINICAN REPUBLIC",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ECUADOR",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "EL SALVADOR",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "ERITREA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "ETHIOPIA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FIJI",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1971-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "FRANCE",
+    "region": "EURO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "FRENCH GUIANA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1973-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "FRENCH POLYNESIA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "GHANA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "GRENADA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1969-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUADELOUPE",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUAM",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1983-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "GUATEMALA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "GUINEA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-07-31"
   },
   {
     "adm_0_name": "GUYANA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HAITI",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1972-01-01",
     "end_date": "2022-12-31"
   },
   {
     "adm_0_name": "HONDURAS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "HONG KONG",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "INDIA",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "INDONESIA",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1968-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "ITALY",
+    "region": "EURO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "JAMAICA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "JAPAN",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1999-01-01",
     "end_date": "2019-12-31"
   },
   {
     "adm_0_name": "KENYA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "KIRIBATI",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MACAU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2018-12-31"
   },
   {
     "adm_0_name": "MALAYSIA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1963-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MALDIVES",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MALI",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MARSHALL ISLANDS",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1989-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MARTINIQUE",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1975-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MAURITANIA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAURITIUS",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-12-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "MAYOTTE",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "MEXICO",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1971-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MICRONESIA (FEDERATED STATES OF)",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1993-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "MONGOLIA",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2015-12-31"
   },
   {
     "adm_0_name": "MONTSERRAT",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "MYANMAR",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1970-01-01",
     "end_date": "2025-02-28"
   },
   {
     "adm_0_name": "NAURU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NEPAL",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NEW CALEDONIA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NEW ZEALAND",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NICARAGUA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "NIGER",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "NIUE",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "NORTHERN MARIANA ISLANDS",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1992-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "OMAN",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2001-01-01",
     "end_date": "2023-12-31"
   },
   {
     "adm_0_name": "PAKISTAN",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1994-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "PALAU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1988-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PANAMA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PAPUA NEW GUINEA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1981-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PARAGUAY",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PERU",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "PHILIPPINES",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1955-01-01",
     "end_date": "2023-11-25"
   },
   {
     "adm_0_name": "PITCAIRN",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2000-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "PUERTO RICO",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "REUNION",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-01-31"
   },
   {
     "adm_0_name": "SAINT BARTHELEMY",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT KITTS AND NEVIS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT LUCIA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT MARTIN",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAINT VINCENT AND THE GRENADINES",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SAMOA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SAO TOME AND PRINCIPE",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-04-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SAUDI ARABIA",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SENEGAL",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SEYCHELLES",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINGAPORE",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SINT MAARTEN",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "2004-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "SOLOMON ISLANDS",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "SPAIN",
+    "region": "EURO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2008-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SRI LANKA",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1965-01-01",
     "end_date": "2024-08-31"
   },
   {
     "adm_0_name": "SUDAN",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2019-07-28",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "SURINAME",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TAIWAN",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1990-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "THAILAND",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1958-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TIMOR-LESTE",
+    "region": "SEARO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1985-01-01",
     "end_date": "2024-10-31"
   },
   {
     "adm_0_name": "TOGO",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2023-09-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "TOKELAU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1982-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "TONGA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "TRINIDAD AND TOBAGO",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1978-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TURKS AND CAICOS ISLANDS",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1974-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "TUVALU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1980-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "UNITED REPUBLIC OF TANZANIA",
+    "region": "AFRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2024-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "UNITED STATES OF AMERICA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1924-01-20",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "URUGUAY",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VANUATU",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1979-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "VENEZUELA",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2023-12-30"
   },
   {
     "adm_0_name": "VIET NAM",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1960-01-01",
     "end_date": "2025-03-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (UK)",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1960-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "VIRGIN ISLANDS (US)",
-    "dataType": "Temporal",
     "region": "PAHO",
+    "dataType": "Temporal",
     "start_date": "1980-01-01",
     "end_date": "2024-12-31"
   },
   {
     "adm_0_name": "WALLIS AND FUTUNA",
+    "region": "WPRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "1991-01-01",
     "end_date": "2024-12-28"
   },
   {
     "adm_0_name": "YEMEN",
+    "region": "EMRO",
     "dataType": "Temporal",
-    "region": "PAHO",
     "start_date": "2015-01-01",
     "end_date": "2024-07-27"
   }
