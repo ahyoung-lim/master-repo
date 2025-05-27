@@ -1943,6 +1943,9 @@ write.csv(od, paste0(dev_path, "open_dengue_1.3/output/od_duplicate_removed.csv"
 # EXTRACT builders ===========================================
 
 od <- read.csv(paste0(dev_path, "open_dengue_1.3/output/od_duplicate_removed.csv"))
+unique(od$adm_0_name)
+od <- od %>%
+  filter(!adm_0_name %in% c("CANADA", "MONGOLIA", "NEW ZEALAND"))
 unique(od$S_res[od$adm_0_name == "BRAZIL" & grepl("MOH", od$UUID)])
 # od$S_res <- ifelse(
 #   od$adm_0_name == "BRAZIL" & grepl("MOH", od$UUID),
@@ -2162,28 +2165,28 @@ od_adm2_new <- od_adm2_new %>%
   slice_head(n = 1)
 
 # merge everything
-od_adm0_new <- rbind(od_adm0_new, od_adm1_new)
-od_adm0_new <- rbind(od_adm0_new, od_adm2_new)
-od_adm0_new <- od_adm0_new %>% select(-country_year)
+national_extract <- rbind(od_adm0_new, od_adm1_new)
+national_extract <- rbind(national_extract, od_adm2_new)
+national_extract <- od_adm0_new %>% select(-country_year)
 
 # now just re-sort by country name and date again and rename
-od_adm0_new = od_adm0_new[
-  order(od_adm0_new$adm_0_name, od_adm0_new$calendar_start_date),
+national_extract = national_extract[
+  order(national_extract$adm_0_name, national_extract$calendar_start_date),
 ]
 
 # final check
-od_adm0_new <- od_adm0_new %>%
+national_extract <- national_extract %>%
   group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
   slice_max(dengue_total, with_ties = FALSE)
 
-od_adm0_new %>%
+national_extract %>%
   group_by(adm_0_name, calendar_start_date, calendar_end_date) %>%
   filter(n()>1)
 
 # save national extract
 
 write.csv(
-  od_adm0_new,
+  national_extract,
   paste0(git_path, "data/releases/V1.3/National_extract_V1_3.csv"),
   row.names = F
 )
@@ -2486,6 +2489,14 @@ write.csv(
   row.names = F
 )
 
+# for updating metadata_main.json and icons on the landing page:
+max(as.Date(unique(spatial_extract$calendar_end_date)))
+max(as.Date(unique(temporal_extract$calendar_end_date)))
+
+# number of countries with subnational data
+spatial_extract%>%
+  filter(S_res %in% c("Admin1", "Admin2"))%>%
+  distinct(adm_0_name)
 
 ### extract comparison metrics
 

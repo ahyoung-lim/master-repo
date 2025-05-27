@@ -190,6 +190,13 @@ f_all %>%
   filter(UUID_old_v != UUID) %>%
   select(UUID_old_v, UUID)
 
+filename_to_change <- f_all %>%
+  filter(UUID_old_v != UUID) %>%
+  filter(grepl("COL|MEX", UUID)) %>%
+  select(UUID_old_v, UUID)
+
+
+
 # updated UUID -- data scraped again from some existing sources
 # so likely include some duplicated records -- double check
 f_all %>%
@@ -764,9 +771,7 @@ for (i in 1:nrow(rename_f_list)) {
 
 
 s <- list.files(path = paste0(dev_path, "open_dengue_1.3/source_files/"))
-
 o <- list.files(path = paste0(dev_path, "open_dengue_1.3/source_files/original_name"))
-
 uuid <- list.files(path = paste0(dev_path, "open_dengue_1.3/source_files/UUID"))
 
 length(o) == length(uuid)
@@ -780,3 +785,25 @@ file_status <- data.frame(
 file_status %>% arrange(filename)
 file_status %>% filter(in_source == TRUE & in_original == FALSE)
 file_status %>% filter(in_source == FALSE & in_original == TRUE)
+
+
+# source files in the Dropbox:
+dropbox_path <- "C:/Users/AhyoungLim/Dropbox/WORK/OpenDengue/11_DENData/01_Dengue_data/source_files/UUID/"
+
+# Get a list of all files in the directory
+all_files <- list.files(path = dropbox_path, full.names = FALSE)
+
+# Rename files based on matched base names
+for (i in seq_len(nrow(filename_to_change))) {
+  matches <- all_files[tools::file_path_sans_ext(all_files) == filename_to_change$UUID_old_v[i]]
+
+  if (length(matches) == 1) {
+    extension <- tools::file_ext(matches)
+    new_file <- paste0(dropbox_path, filename_to_change$UUID[i], ".", extension)
+    file.rename(from = paste0(dropbox_path, matches), to = new_file)
+  } else if (length(matches) > 1) {
+    warning(paste("Multiple matches found for:", filename_to_change$UUID_old_v[i]))
+  } else {
+    warning(paste("File not found for base name:", filename_to_change$UUID_old_v[i]))
+  }
+}
